@@ -1,23 +1,28 @@
 import React, { Suspense, lazy } from 'react';
+import { Provider } from 'react-redux'
 import ReactDOM from 'react-dom';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import postlist from './Containers/PostListContainer'
+import  store from './Store/MainStore'
+import header from './Containers/HeaderContainer'
+import App from './App'
+// const Header = lazy(() => import('./Components/Header.js'));
 
-const Header = lazy(() => import('./Components/Header.js'));
-
-
-const App = () => (
-  <Router>
-    <Suspense fallback={<div>Loading...</div>}>
-      <Switch>
-        <Route exact path="/" component={Header}/>
-        <Route path="/home" component={Header}/>
-      </Switch>
-    </Suspense>
-  </Router>
+const Index = () => (
+  <Provider store={store}>
+    <Router>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Switch>
+          <Route exact path="/" component={App} />
+          <Route path="/home" component={App} />
+        </Switch>
+      </Suspense>
+    </Router>
+  </Provider>
 );
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<Index />, document.getElementById('root'));
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: http://bit.ly/CRA-PWA

@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
+import AppNavBar from './Containers/HeaderContainer';
+import PostListContainer from './Containers/PostListContainer';
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-        </header>
+      <div>
+        <AppNavBar />
+        <div className="container">
+          <PostListContainer />
+        </div>
       </div>
     );
   }
