@@ -9,6 +9,8 @@ import header from './Containers/HeaderContainer'
 import App from './App'
 // const Header = lazy(() => import('./Components/Header.js'));
 
+import { Wall } from './Components/Wall'
+
 const Index = () => (
   <Provider store={store}>
     <Router>
@@ -16,6 +18,7 @@ const Index = () => (
         <Switch>
           <Route exact path="/" component={App} />
           <Route path="/home" component={App} />
+          <Route path="/wall" component={Wall} />
         </Switch>
       </Suspense>
     </Router>
