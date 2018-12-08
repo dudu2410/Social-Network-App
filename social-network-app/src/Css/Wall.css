@@ -1,11 +1,11 @@
-.Img_Wall {
+/* .Img_Wall {
     background: #4169E1;
     height: 150px;
     width: 100%;
-}
-.Img_Wall img{
+} */
+    .Img_Wall img{
     background: #4169E1;
-    height: 150px;
+    height: 300px;
     width: 100%;
 }
 .avatar {
