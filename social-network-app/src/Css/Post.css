@@ -11,19 +11,7 @@ body {
     width: 588px;
     margin: auto;
     border-radius: 5px;
-  }
-  .border_optionalMedia{
-    width: 500px;
-    height: 180px;
-    margin-left: 58px;
-    margin-top: 10px;
-    border-left: 1px solid #e1e8ed;
-    border-right: 1px solid #e1e8ed;
-    border-top: 1px solid #e1e8ed;
-    border-bottom: 1px solid #e1e8ed;
-    border-radius: 10px;
-  }
-  
+  }  
   
   /* The action list is optional. */
   .tweetEntry-action-list {
@@ -113,5 +101,8 @@ body {
   .icon_check{
     width: 15px;
     height: 15px;
+  }
+  .space-top {
+    margin-top: 20px;
   }
   

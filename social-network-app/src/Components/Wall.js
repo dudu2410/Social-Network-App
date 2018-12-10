@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
 import '../Css/Wall.css'
+import { SemiHeader } from './Semi-Header'
 
 export const Wall = () => {
     return (
         <div>
             <div className="Img_Wall">
-                <img></img>
+                <img src="https://coverfiles.alphacoders.com/508/50802.jpg"></img>
             </div>
+            <SemiHeader></SemiHeader>
             <div className="avatar_div">
                 <div className="avatar">
                 <img src="http://www.croop.cl/UI/twitter/images/russel.jpg" />

@@ -9,7 +9,7 @@ class App extends Component {
     return (
       <div className="background">
         <AppNavBar />
-        <Wall></Wall>
+        <Wall/>
         <div className="container">
           <PostListContainer />
         </div>

@@ -4,7 +4,7 @@ import '../Css/Post.css'
 export const Post = ({ id, avatar, username, time_stamp, content, heart, comment, share }) => {
 
   return (
-    <div id={id} >
+    <div id={id} className="space-top">
       <div className="tweetEntry-tweetHolder">
         <div className="tweetEntry">
           <div className="tweetEntry-content">
@@ -20,16 +20,6 @@ export const Post = ({ id, avatar, username, time_stamp, content, heart, comment
             </a>
             <div className="tweetEntry-text-container">{content}</div>
           </div>
-          {/* <div className="border_optionalMedia">
-            <div className="optionalMedia">
-              <img className="optionalMedia-img" alt="" src="http://placekitten.com/500/400" />
-            </div>
-            <div className="details">
-              Help @marshmellomusic help 🐶🐩🐕! <br />
-              <br />
-              Click the "donate" button to the right of his video to make a donation to @HopeForPaws animal rescue: https://youtu.be/cPyArmc7KWk . #YouTubeGiving
-                </div>
-          </div> */}
           <div className="tweetEntry-action-list" style={{ lineHeight: '24px', color: '#b1bbc3' }}>
             <i className="fa fa-reply" style={{ width: '80px', padding: '0 5px 0 5px' }}> Reply: {comment}</i>
             <i className="fa fa-retweet" style={{ width: '80px', padding: '0 5px 0 5px' }}>Share: {share}</i>

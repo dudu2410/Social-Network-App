@@ -1,14 +1,10 @@
-import React, { Suspense, lazy } from 'react';
+import React, { Suspense } from 'react';
 import { Provider } from 'react-redux'
 import ReactDOM from 'react-dom';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import postlist from './Containers/PostListContainer'
 import  store from './Store/MainStore'
-import header from './Containers/HeaderContainer'
 import App from './App'
-// const Header = lazy(() => import('./Components/Header.js'));
-
 import { Wall } from './Components/Wall'
 
 const Index = () => (
