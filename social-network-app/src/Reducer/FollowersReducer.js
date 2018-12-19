@@ -25,11 +25,11 @@ const initialState = {
     }
 };
 
-export function followersReducer(state = initialState, action) {
+export default function followersReducer(state = initialState, action) {
     switch (action.type) {
         case ADD_FOLLOWERS:
             return Object.assign({}, state, {
-                posts: [
+                followers: [
                     ...state.followers,
                     {
                         id: action.id,

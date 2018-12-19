@@ -1,10 +1,9 @@
 import { connect } from 'react-redux';
-import { Followers } from '../Components/Followers'
-
+import Followers from '../Components/Followers'
 
 const mapStateToProps = state => {
     return {
-        followers: state.postReducer.followers
+        followers: state.followersReducer.followers
     }
 }
 
