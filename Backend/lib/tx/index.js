@@ -85,7 +85,7 @@ function decodePostContent(data) {
       return v1.decodePlainTextContent(data);
       break;
     default:
-      throw Error('Unsupport content type');
+      return {type: -1, text: ''};
   }
 }
 
