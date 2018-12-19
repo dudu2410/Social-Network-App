@@ -5,6 +5,12 @@ import '../Css/PostList.css'
 
 export const PostList = ({ posts }) => {
     console.log(posts);
+    if (posts === undefined) {
+        return (
+            <div className="background">
+            </div>
+        );
+    }
     return (
         <div className="background">
             <ul>
@@ -15,5 +21,5 @@ export const PostList = ({ posts }) => {
                 ))}
             </ul>
         </div>
-        );
+    );
 }

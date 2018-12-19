@@ -33,13 +33,13 @@ const mapDispatchToProps = (dispatch, ownProps) => bindActionCreators({
         var today = new Date().getDate();
         var currentState = getState();
         console.log(input);
-        dispatch(
-            addPost(currentState.postReducer.user.id,
-                input,
-                today.toLocaleString,
-                currentState.postReducer.user.avatar,
-                currentState.postReducer.user.username,
-                0, 0, 0));
+        // dispatch(
+        //     addPost(currentState.postReducer.user.id,
+        //         input,
+        //         today.toLocaleString,
+        //         currentState.postReducer.user.avatar,
+        //         currentState.postReducer.user.username,
+        //         0, 0, 0));
     },
 }, dispatch)
 
