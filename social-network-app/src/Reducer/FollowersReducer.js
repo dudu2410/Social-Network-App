@@ -26,8 +26,10 @@ const initialState = {
 };
 
 export default function followersReducer(state = initialState, action) {
+    console.log("action name" + action.type+action.id+action.avatar+action.username);
     switch (action.type) {
         case ADD_FOLLOWERS:
+        console.log("followrsReducer" + state);
             return Object.assign({}, state, {
                 followers: [
                     ...state.followers,
@@ -38,7 +40,9 @@ export default function followersReducer(state = initialState, action) {
                     }
                 ]
             })
-        default:
+            default:
+
+            console.log("followrsReducer after: " + state)
             return state;
     }
 }

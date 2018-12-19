@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import '.././Css/App.css'
 
 const Followers = ({ followers }) => {
-    console.log("hello followers");
     console.log(followers);
   return (
     <div className="background">

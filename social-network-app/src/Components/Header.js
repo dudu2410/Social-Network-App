@@ -3,6 +3,7 @@ import '../Css/Header.css'
 import { addPost } from '../Actions/Actions';
 
 export const Header = ({ user, onPostClick }) => {
+    console.log("ham post:"+onPostClick)
     var input;
     return (
         <nav className="navbar justify-content-between navbar-dark bg-primary">

@@ -18,6 +18,7 @@ export function addPost(id, content, timestamp, avatar, username, heart, comment
 }
 
 export function addFollower(id, avatar, username) {
+    console.log("addFollower");
     return {
         type: ADD_FOLLOWERS,
         id,

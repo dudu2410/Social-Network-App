@@ -4,7 +4,7 @@ import '../Css/PostList.css'
 
 
 export const PostList = ({ posts }) => {
-    console.log(posts);
+    //console.log(posts);
     return (
         <div className="background">
             <ul>
