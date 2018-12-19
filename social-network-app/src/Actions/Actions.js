@@ -1,4 +1,6 @@
+import {decode} from '../lib/tx';
 
+var a = decode("dasdasda");
 
 export const ADD_POST = 'ADD_POST';
 

@@ -7,8 +7,9 @@ var request = require('request');
 
 server.listen(3001);
 var public_key = 'GDOU3TTWZ4BEQCUK5QTJ2WNFFN5S3JEUJOO7GA6SJJ5BVJWUAROCZISN';
+var test = 'GDMNG3PLGUMPHXPPMRZ7EQRMT34F4JU6574OZIQL3LIK5P76CVW5QMTL';
 var secret_key = 'SARWVDNIGLM53GQVP34DCG3DSF2FBTKOSMH422VWPXR2AUZH4DWR3KTV';
-var getAccountTransactionAPI = `https://komodo.forest.network/tx_search?query="account=%27${public_key}%27"`;
+var getAccountTransactionAPI = `https://komodo.forest.network/tx_search?query="account=%27${test}%27"`;
 const commitTransaction = (tx) => {
     return `https://komodo.forest.network/broadcast_tx_commit?tx=0x${tx}`;
 }
@@ -70,24 +71,44 @@ app.get("/get/post", function (req, res) {
                     content_type: '',
                     from: '',
                     to: '',
+                    sequence: null,
                 };
-                switch(txjson.operation){
+                switch (txjson.operation) {
                     case 'post': {
                         var postContent = decodePostContent(txjson.params.content);
                         post.type = 'post';
-                        post.content_type = postContent.type === 1 ? 'text' : 'other';
+                        post.content_type = postContent.type === 1 ? 'text' : 'unknown';
                         post.content = postContent.text;
                         post.from = txjson.account;
                         post.to = txjson.account;
+                        post.sequence = txjson.sequence;
                         break;
                     }
                     case 'payment': {
+                        post.type = 'payment';
+                        post.content_type = 'currency';
+                        post.content = txjson.params.amount;
+                        post.from = txjson.account;
+                        post.to = txjson.params.address;
+                        post.sequence = txjson.sequence;
                         break;
                     }
                     case 'create_account': {
+                        post.type = 'create_account';
+                        post.content_type = 'address';
+                        post.content = txjson.params.address;
+                        post.from = txjson.account;
+                        post.to = txjson.params.address;
+                        post.sequence = txjson.sequence;
                         break;
-                    } 
+                    }
                     case 'update_account': {
+                        post.type = 'update_account';
+                        post.content_type = txjson.params.key;
+                        post.content = txjson.params.key === 'name' ? txjson.params.value.toString('utf-8') : txjson.params.value.toString('base64');
+                        post.from = txjson.account;
+                        post.to = txjson.account;
+                        post.sequence = txjson.sequence;
                         break;
                     }
                     case 'interact': {
