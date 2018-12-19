@@ -1,8 +1,7 @@
 
 
-export const ADD_POST = 'ADD_POST';
-export const ADD_FOLLOW = 'ADD_FOLLOW';
-
+export const ADD_POST = 'ADD_POST'; 
+export const ADD_FOLLOWERS = 'ADD_FOLLOWERS';
 
 export function addPost(id, content, timestamp, avatar, username, heart, comment, share) {
     return {
@@ -18,13 +17,11 @@ export function addPost(id, content, timestamp, avatar, username, heart, comment
     }
 }
 
-export function addFollow(id1,username1,id2,username2)
-{
-    return{
-        type: ADD_FOLLOW,
-        id1,
-        username1,
-        id2,
-        username2
+export function addFollower(id, avatar, username) {
+    return {
+        type: ADD_FOLLOWERS,
+        id,
+        avatar,
+        username,
     }
 }
