@@ -1,5 +1,5 @@
 
-var { decode, encode, sign, encodePostContent, decodePostContent} = require("./lib/tx");
+var { decode, encode, sign, encodePostContent, decodePostContent, hash } = require("./lib/tx");
 var express = require("express");
 var app = express();
 var server = require("http").createServer(app);
@@ -9,8 +9,9 @@ server.listen(3001);
 var public_key = 'GDOU3TTWZ4BEQCUK5QTJ2WNFFN5S3JEUJOO7GA6SJJ5BVJWUAROCZISN';
 var secret_key = 'SARWVDNIGLM53GQVP34DCG3DSF2FBTKOSMH422VWPXR2AUZH4DWR3KTV';
 var getAccountTransactionAPI = `https://komodo.forest.network/tx_search?query="account=%27${public_key}%27"`;
-
-
+const commitTransaction = (tx) => {
+    return `https://komodo.forest.network/broadcast_tx_commit?tx=0x${tx}`;
+}
 
 app.get("/", function (req, res) {
     res.setHeader('Content-Type', 'application/json');
@@ -37,16 +38,20 @@ app.get("/post", function (req, res) {
     const Transaction = {
         version: 1,
         account: public_key,
-        sequence: 260,
+        sequence: 1,
         memo: Buffer.alloc(0),
         operation: 'post',
         params: postParams
     }
     sign(Transaction, secret_key);
-    var txEncoded =  encode(Transaction);
-    var txDecoded = decode(txEncoded);
+    var txEncoded = encode(Transaction).toString('hex').toUpperCase();
+    // var txDecoded = decode(txEncoded);
     res.setHeader('Content-Type', 'application/json');
-    res.send(decodePostContent(txDecoded.params.content));
+    request(commitTransaction(txEncoded), (err, response, body) => {
+        console.log(commitTransaction(txEncoded));
+        console.log(err);
+        res.send(body);
+    })
 });
 
 app.get("/get/post", function (req, res) {
@@ -58,7 +63,41 @@ app.get("/get/post", function (req, res) {
             var result = [];
             var json = JSON.parse(body);
             json.result.txs.forEach(tx => {
-                result.push(decode(Buffer.from(tx.tx, 'base64')));
+                var txjson = decode(Buffer.from(tx.tx, 'base64'));
+                var post = {
+                    type: '',
+                    content: '',
+                    content_type: '',
+                    from: '',
+                    to: '',
+                };
+                switch(txjson.operation){
+                    case 'post': {
+                        var postContent = decodePostContent(txjson.params.content);
+                        post.type = 'post';
+                        post.content_type = postContent.type === 1 ? 'text' : 'other';
+                        post.content = postContent.text;
+                        post.from = txjson.account;
+                        post.to = txjson.account;
+                        break;
+                    }
+                    case 'payment': {
+                        break;
+                    }
+                    case 'create_account': {
+                        break;
+                    } 
+                    case 'update_account': {
+                        break;
+                    }
+                    case 'interact': {
+                        break;
+                    }
+                    default: {
+
+                    }
+                }
+                result.push(post);
             });
             res.send(result);
         }
