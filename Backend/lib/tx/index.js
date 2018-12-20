@@ -89,5 +89,12 @@ function decodePostContent(data) {
   }
 }
 
+function encodeFollowings(value){
+  return v1.encodeFollowsValue(value);
+}
 
-module.exports = { encode, decode, verify, sign, hash, encodePostContent, decodePostContent };
+function decodeFollowings(data){
+  return v1.decodePlainTextContent(data);
+}
+
+module.exports = { encode, decode, verify, sign, hash, encodePostContent, decodePostContent, encodeFollowings, decodeFollowings};

@@ -43,7 +43,7 @@ const mapDispatchToProps = (dispatch, ownProps) => bindActionCreators({
                 //         currentState.postReducer.user.username,
                 //         0, 0, 0));
             })
-
+    
     },
 }, dispatch)
 

@@ -1,5 +1,5 @@
 
-var { getAccountTransactionsService } = require("./src/service/TransactionService");
+var { getAccountTransactionsService, getCurrentTransactionSequenceService, getUserInfoService } = require("./src/service/TransactionService");
 var express = require("express");
 var app = express();
 var server = require("http").createServer(app);
@@ -59,7 +59,7 @@ app.get("/post", function (req, res) {
 });
 
 //get all transaction of a user by address (public-key)
-//example: localhost:3002/get/transactions?address=blabalbla...
+//example: localhost:3002/get/transactions?address=GDOU3TTWZ4BEQCUK5QTJ2WNFFN5S3JEUJOO7GA6SJJ5BVJWUAROCZISN
 app.get("/get/transactions", function (req, res) {
     res.set({
         'Content-Type': 'application/json',
@@ -71,4 +71,35 @@ app.get("/get/transactions", function (req, res) {
         }).catch((err) => {
             res.send(err);
         });
+});
+
+
+//get current transaction sequence of a user by address (public-key)
+//example: localhost:3002/get/get/current_sequence?address=GDOU3TTWZ4BEQCUK5QTJ2WNFFN5S3JEUJOO7GA6SJJ5BVJWUAROCZISN
+app.get("/get/current_sequence", function (req, res) {
+    res.set({
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
+    });
+    getCurrentTransactionSequenceService(req.query.address)
+        .then((result) => {
+            res.send(result);
+        }).catch((err) => {
+            res.send(err);
+        })
+});
+
+//get current transaction sequence of a user by address (public-key)
+//example: localhost:3002/get/get/current_sequence?address=GDOU3TTWZ4BEQCUK5QTJ2WNFFN5S3JEUJOO7GA6SJJ5BVJWUAROCZISN
+app.get("/get/current_user_info", function (req, res) {
+    res.set({
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
+    });
+    getUserInfoService(req.query.address)
+        .then((result) => {
+            res.send(result);
+        }).catch((err) => {
+            res.send(err);
+        })
 });
