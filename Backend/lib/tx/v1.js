@@ -27,6 +27,7 @@ const PlainTextContent = vstruct([
 ]);
 
 
+
 const PostParams = vstruct([
   // Maximum length 65536 in bytes
   { name: 'content', type: vstruct.VarBuffer(vstruct.UInt16BE) },
@@ -39,6 +40,10 @@ const PostParams = vstruct([
 const UpdateAccountParams = vstruct([
   { name: 'key', type: vstruct.VarString(vstruct.UInt8) },
   { name: 'value', type: vstruct.VarBuffer(vstruct.UInt16BE) },
+]);
+
+const Followings = vstruct([
+  { name: 'addresses', type: vstruct.VarArray(vstruct.UInt16BE, vstruct.Buffer(35)) },
 ]);
 
 const InteractParams = vstruct([
@@ -56,6 +61,14 @@ function encodePlainTextContent(content) {
 
 function decodePlainTextContent(data) {
   return PlainTextContent.decode(data)
+}
+
+function encodeFollowsValue(value){
+  return Followings.encode(value);
+}
+
+function decodeFollowsValue(data){
+  return Followings.decode(data);
 }
 
 function encode(tx) {
@@ -168,5 +181,7 @@ module.exports = {
   encode,
   decode,
   encodePlainTextContent,
-  decodePlainTextContent
+  decodePlainTextContent,
+  decodeFollowsValue,
+  encodeFollowsValue,
 };

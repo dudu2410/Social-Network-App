@@ -1,4 +1,4 @@
-var { decode, encode, sign, encodePostContent, decodePostContent, hash } = require("../../lib/tx");
+var { decode, encode, sign, encodePostContent, decodePostContent, hash, decodeFollowings } = require("../../lib/tx");
 
 const POST_OPERATION = 'post';
 const PAYMENT_OPERATION = 'payment';
@@ -15,7 +15,6 @@ var toSimpleTransactionInfo = (tx) => {
         content: '',
         content_type: '',
         from: '',
-        to: '',
         sequence: null,
     };
     switch (txjson.operation) {
@@ -25,34 +24,32 @@ var toSimpleTransactionInfo = (tx) => {
             simpleTransactionInfo.content_type = postContent.type === 1 ? 'text' : 'unknown';
             simpleTransactionInfo.content = postContent.text;
             simpleTransactionInfo.from = txjson.account;
-            simpleTransactionInfo.to = txjson.account;
             simpleTransactionInfo.sequence = txjson.sequence;
             break;
         }
         case PAYMENT_OPERATION: {
             simpleTransactionInfo.type = PAYMENT_OPERATION;
             simpleTransactionInfo.content_type = 'currency';
-            simpleTransactionInfo.content = txjson.params.amount;
+            simpleTransactionInfo.content = txjson.params;
             simpleTransactionInfo.from = txjson.account;
-            simpleTransactionInfo.to = txjson.params.address;
             simpleTransactionInfo.sequence = txjson.sequence;
             break;
         }
         case CREATE_ACCOUNT_OPERATION: {
             simpleTransactionInfo.type = CREATE_ACCOUNT_OPERATION;
             simpleTransactionInfo.content_type = 'address';
-            simpleTransactionInfo.content = txjson.params.address;
+            simpleTransactionInfo.content = txjson.params;
             simpleTransactionInfo.from = txjson.account;
-            simpleTransactionInfo.to = txjson.params.address;
             simpleTransactionInfo.sequence = txjson.sequence;
             break;
         }
         case UPDATE_ACCOUNT_OPERATION: {
             simpleTransactionInfo.type = UPDATE_ACCOUNT_OPERATION;
             simpleTransactionInfo.content_type = txjson.params.key;
-            simpleTransactionInfo.content = txjson.params.key === 'name' ? txjson.params.value.toString('utf-8') : txjson.params.value.toString('base64');
+            simpleTransactionInfo.content = txjson.params.key === 'name' ? txjson.params.value.toString('utf-8') :
+                txjson.params.key === 'followings' ? decodeFollowings(txjson.params.value) :
+                    txjson.params.value.toString('base64');
             simpleTransactionInfo.from = txjson.account;
-            simpleTransactionInfo.to = txjson.account;
             simpleTransactionInfo.sequence = txjson.sequence;
             break;
         }
@@ -67,4 +64,4 @@ var toSimpleTransactionInfo = (tx) => {
 
 }
 
-module.exports = {toSimpleTransactionInfo};
+module.exports = { toSimpleTransactionInfo ,UPDATE_ACCOUNT_OPERATION };

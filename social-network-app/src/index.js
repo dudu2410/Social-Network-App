@@ -8,7 +8,7 @@ import AppCont from './Containers/AppContainer'
 import { Wall } from './Components/Wall'
 import {changeCurrentViewUser} from './Actions/Actions'
 
-store.dispatch(changeCurrentViewUser('GDOU3TTWZ4BEQCUK5QTJ2WNFFN5S3JEUJOO7GA6SJJ5BVJWUAROCZISN'));
+store.dispatch(changeCurrentViewUser('GAJQ47RMDTXYTCBMMW4A4DUMTB5RQLTGQZDMMABW6RTQJGKINJ4JTRTP'));
 
 const Index = () => (
   <Provider store={store}>
