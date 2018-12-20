@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import  store from './Store/MainStore'
 import App from './App'
 import { Wall } from './Components/Wall'
+import { LoginPage } from './Containers/LoginPage'
 
 const Index = () => (
   <Provider store={store}>
@@ -15,6 +16,7 @@ const Index = () => (
           <Route exact path="/" component={App} />
           <Route path="/home" component={App} />
           <Route path="/wall" component={Wall} />
+          <Route path="/login" component={LoginPage} />
         </Switch>
       </Suspense>
     </Router>

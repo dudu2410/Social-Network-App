@@ -50,6 +50,11 @@ function sign(tx, secret) {
   tx.signature = key.sign(getUnsignedHash(tx));
 }
 
+function GetPKFromFK(secret) {
+  const key = Keypair.fromSecret(secret);
+  return key.publicKey();
+}
+
 function verify(tx) {
   const key = Keypair.fromPublicKey(tx.account);
   return key.verify(getUnsignedHash(tx), tx.signature);
@@ -89,6 +94,6 @@ function decodePostContent(data) {
       throw Error('Unsupport content type');
   }
 }
-export {encode, decode, verify, sign, hash, encodePostContent, decodePostContent}
+export {encode, decode, verify, sign, hash, encodePostContent, decodePostContent, GetPKFromFK }
 
 // module.exports = { encode, decode, verify, sign, hash, encodePostContent, decodePostContent };
