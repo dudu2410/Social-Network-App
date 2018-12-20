@@ -23,7 +23,6 @@ export function postReducer(state = initialState, action) {
                         content: action.content,
                         content_type: action.content_type,
                         from: action.from,
-                        to: action.to,
                         sequence: action.sequence,
                         avatar: action.avatar,
                         username: action.username,

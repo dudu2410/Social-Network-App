@@ -98,6 +98,11 @@ var getUserInfoService = (address) => {
                 updateAvtTxs = result.filter((info) => {
                     return info.type === UPDATE_ACCOUNT_OPERATION && info.content_type === 'picture';
                 });
+                //todo try this following 
+                var updateFollowingsTxs = [];
+                updateFollowingsTxs = result.filter((info) => {
+                    return info.type === UPDATE_ACCOUNT_OPERATION && info.content_type === 'followings';
+                });
 
                 var userInfo = {
                     name: getLastestTransaction(updateNameTxs) === null ? ANONYMOUST_NAME
@@ -124,6 +129,11 @@ var getLastestTransaction = (simpleInfos) => {
         return (prev.sequence > current.sequence) ? prev : current
     });
     return lastestTx;
+}
+
+//an util to get unique item array
+var getUniqueArray = (array) => {
+    return array.filter((v, i, a) => a.indexOf(v) === i);
 }
 
 module.exports = { getAccountTransactionsService, getCurrentTransactionSequenceService, getUserInfoService };

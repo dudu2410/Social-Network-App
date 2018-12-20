@@ -6,7 +6,7 @@ export const LOAD_POST = 'LOAD_POST';
 export const CHANGE_CURRENT_VIEW_USER = 'CHANGE_CURRENT_VIEW_USER';
 
 
-export function addPost(id, type, content, content_type, sequence, from, to, avatar, username, heart, comment, share) {
+export function addPost(id, type, content, content_type, sequence, from, avatar, username, heart, comment, share) {
     return {
         type: ADD_POST,
         id,
@@ -14,7 +14,6 @@ export function addPost(id, type, content, content_type, sequence, from, to, ava
         content,
         content_type,
         from,
-        to,
         sequence,
         avatar,
         username,
