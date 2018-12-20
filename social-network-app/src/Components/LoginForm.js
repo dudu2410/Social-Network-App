@@ -20,9 +20,7 @@ class LoginForm extends React.Component {
     onSubmit(e) {
         e.preventDefault();
         this.setState ( { errrors: {}, isLoading: true});
-        this.props.login(this.state).then(
-            (res) => this.context.router.push('/'),
-        );
+        this.props.login(this.state);
     };
 
     onChange(e) {

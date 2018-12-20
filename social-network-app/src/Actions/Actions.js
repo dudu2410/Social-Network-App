@@ -23,6 +23,6 @@ export function login(data){
     return dispatch => {
         console.log(data.privatekey);  
         console.log(GetPKFromFK(data.privatekey));
-        return axios.post('/',data);
+        return axios.get('http://localhost:3002/login/:123');
     }
 }

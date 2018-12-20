@@ -5,11 +5,12 @@ var app = express();
 var server = require("http").createServer(app);
 var request = require('request');
 
-server.listen(3001);
+server.listen(3002);
 var public_key = 'GDOU3TTWZ4BEQCUK5QTJ2WNFFN5S3JEUJOO7GA6SJJ5BVJWUAROCZISN';
 var test = 'GDMNG3PLGUMPHXPPMRZ7EQRMT34F4JU6574OZIQL3LIK5P76CVW5QMTL';
 var secret_key = 'SARWVDNIGLM53GQVP34DCG3DSF2FBTKOSMH422VWPXR2AUZH4DWR3KTV';
 var getAccountTransactionAPI = `https://komodo.forest.network/tx_search?query="account=%27${test}%27"`;
+var getInforAccountAPI = `https://komodo.forest.network/tx_search?query=%22account=%27${public_key}%27%22`;
 const commitTransaction = (tx) => {
     return `https://komodo.forest.network/broadcast_tx_commit?tx=0x${tx}`;
 }
@@ -123,4 +124,37 @@ app.get("/get/post", function (req, res) {
             res.send(result);
         }
     });
+});
+
+app.get("/login/:PublicKey", function (req, res) {
+    res.set({
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
+    });
+    const PK = req.params.PublicKey;
+    request(getInforAccountAPI, function (err, response, body) {
+        if (err) {
+            console.log(err);
+        } else {
+            var result = [];
+            var json = JSON.parse(body);
+            json.result.txs.forEach(tx => {
+                var txjson = decode(Buffer.from(tx.tx, 'base64'));
+
+                console.log(txjson);
+
+                var post = {
+                    type: '',
+                    content: '',
+                    content_type: '',
+                    from: '',
+                    to: '',
+                    sequence: null,
+                };
+            });
+            console.log(result);
+        };
+    });
+    console.log(PK);
+    res.send({abc : "abc"});
 });
