@@ -7,6 +7,8 @@ import  store from './Store/MainStore'
 import AppCont from './Containers/AppContainer'
 import { Wall } from './Components/Wall'
 import {changeCurrentViewUser} from './Actions/Actions'
+import { LoginPage } from './Containers/LoginPage'
+
 
 store.dispatch(changeCurrentViewUser('GAJQ47RMDTXYTCBMMW4A4DUMTB5RQLTGQZDMMABW6RTQJGKINJ4JTRTP'));
 
@@ -18,6 +20,7 @@ const Index = () => (
           <Route exact path="/" component={AppCont} />
           <Route path="/home" component={AppCont} />
           <Route path="/wall" component={Wall} />
+          <Route path="/login" component={LoginPage} />
         </Switch>
       </Suspense>
     </Router>
