@@ -75,7 +75,7 @@ app.get("/get/transactions", function (req, res) {
 
 
 //get current transaction sequence of a user by address (public-key)
-//example: localhost:3002/get/get/current_sequence?address=GDOU3TTWZ4BEQCUK5QTJ2WNFFN5S3JEUJOO7GA6SJJ5BVJWUAROCZISN
+//example: localhost:3002/get/current_sequence?address=GDOU3TTWZ4BEQCUK5QTJ2WNFFN5S3JEUJOO7GA6SJJ5BVJWUAROCZISN
 app.get("/get/current_sequence", function (req, res) {
     res.set({
         'Content-Type': 'application/json',
@@ -89,8 +89,8 @@ app.get("/get/current_sequence", function (req, res) {
         })
 });
 
-//get current transaction sequence of a user by address (public-key)
-//example: localhost:3002/get/get/current_sequence?address=GDOU3TTWZ4BEQCUK5QTJ2WNFFN5S3JEUJOO7GA6SJJ5BVJWUAROCZISN
+//get current user info  of a user by address (public-key)
+//example: localhost:3002/get/current_user_info?address=GDOU3TTWZ4BEQCUK5QTJ2WNFFN5S3JEUJOO7GA6SJJ5BVJWUAROCZISN
 app.get("/get/current_user_info", function (req, res) {
     res.set({
         'Content-Type': 'application/json',
