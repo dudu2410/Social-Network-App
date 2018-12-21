@@ -79,22 +79,41 @@ function encodePostContent(content) {
 
 function decodePostContent(data) {
   const contentType = PostContent.decode(data);
-  console.log(contentType);
   switch (contentType.type) {
     case 1:
       return v1.decodePlainTextContent(data);
       break;
     default:
-      return {type: -1, text: ''};
+      return { type: -1, text: '' };
   }
 }
 
-function encodeFollowings(value){
+function encodeFollowings(value) {
   return v1.encodeFollowsValue(value);
 }
 
-function decodeFollowings(data){
-  return v1.decodePlainTextContent(data);
+function decodeFollowings(data) {
+  return v1.decodeFollowsValue(data);
 }
 
-module.exports = { encode, decode, verify, sign, hash, encodePostContent, decodePostContent, encodeFollowings, decodeFollowings};
+function decodeBase32(data) {
+  return v1.decodeBase32(data);
+}
+
+function encodeBase32(data) {
+  return v1.encodeBase32(data);
+}
+
+module.exports = {
+  encode,
+  decode,
+  verify,
+  sign,
+  hash,
+  encodePostContent,
+  decodePostContent,
+  encodeFollowings,
+  decodeFollowings,
+  decodeBase32,
+  encodeBase32
+};
