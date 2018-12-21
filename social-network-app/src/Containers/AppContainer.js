@@ -21,10 +21,9 @@ const mapDispatchToProps = (dispatch, ownProps) => bindActionCreators({
                     var post = {
                         id: simpleTxInfo.tx_hash,
                         type: simpleTxInfo.type,
-                        content: simpleTxInfo.content,
+                        content: simpleTxInfo.content.toString(),
                         content_type: simpleTxInfo.content_type,
                         from: simpleTxInfo.from,
-                        to: simpleTxInfo.to,
                         sequence: simpleTxInfo.sequence,
                         avatar: '',
                         username: '',
@@ -43,7 +42,7 @@ const mapDispatchToProps = (dispatch, ownProps) => bindActionCreators({
                 //         currentState.postReducer.user.username,
                 //         0, 0, 0));
             })
-
+    
     },
 }, dispatch)
 

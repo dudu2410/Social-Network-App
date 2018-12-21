@@ -8,8 +8,10 @@ import AppCont from './Containers/AppContainer'
 import { Wall } from './Components/Wall'
 import FollowersContainer from './Containers/FollowersContainer';
 import {changeCurrentViewUser} from './Actions/Actions'
+import { LoginPage } from './Containers/LoginPage'
 
-store.dispatch(changeCurrentViewUser('GDOU3TTWZ4BEQCUK5QTJ2WNFFN5S3JEUJOO7GA6SJJ5BVJWUAROCZISN'));
+
+store.dispatch(changeCurrentViewUser('GAJQ47RMDTXYTCBMMW4A4DUMTB5RQLTGQZDMMABW6RTQJGKINJ4JTRTP'));
 
 const Index = () => (
   <Provider store={store}>
@@ -20,6 +22,7 @@ const Index = () => (
           <Route path="/home" component={AppCont} />
           <Route path="/wall" component={Wall} />
           <Route path="/followers" component={FollowersContainer} />
+          <Route path="/login" component={LoginPage} />
         </Switch>
       </Suspense>
     </Router>
