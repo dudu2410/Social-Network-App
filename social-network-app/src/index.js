@@ -4,17 +4,20 @@ import ReactDOM from 'react-dom';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import  store from './Store/MainStore'
-import App from './App'
+import AppCont from './Containers/AppContainer'
 import { Wall } from './Components/Wall'
 import FollowersContainer from './Containers/FollowersContainer';
+import {changeCurrentViewUser} from './Actions/Actions'
+
+store.dispatch(changeCurrentViewUser('GDOU3TTWZ4BEQCUK5QTJ2WNFFN5S3JEUJOO7GA6SJJ5BVJWUAROCZISN'));
 
 const Index = () => (
   <Provider store={store}>
     <Router>
       <Suspense fallback={<div>Loading...</div>}>
         <Switch>
-          <Route exact path="/" component={App} />
-          <Route path="/home" component={App} />
+          <Route exact path="/" component={AppCont} />
+          <Route path="/home" component={AppCont} />
           <Route path="/wall" component={Wall} />
           <Route path="/followers" component={FollowersContainer} />
         </Switch>

@@ -1,43 +1,14 @@
-import { ADD_POST } from '../Actions/Actions'
+import { ADD_POST, LOAD_POST } from '../Actions/Actions'
+
+
 
 const initialState = {
-    posts: [
-        {
-            id: 1,
-            content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis odit doloribus at aspernatur deserunt repellendus modi eaque ipsa fugit! Ullam animi, doloremque nisi inventore vel voluptatibus nulla dicta nam libero!",
-            timestamp: "02-12-2018",
-            avatar: "http://placekitten.com/200/200",
-            username: "Dummy user",
-            heart: 9999,
-            comment: 9999,
-            share: 9999,
-        },
-        {
-            id: 2,
-            content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis odit doloribus at aspernatur deserunt repellendus modi eaque ipsa fugit! Ullam animi, doloremque nisi inventore vel voluptatibus nulla dicta nam libero!",
-            timestamp: "01-12-2018",
-            avatar: "http://placekitten.com/200/200",
-            username: "Dummy user",
-            heart: 121,
-            comment: 234,
-            share: 45,
-        },
-        {
-            id: 3,
-            content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis odit doloribus at aspernatur deserunt repellendus modi eaque ipsa fugit! Ullam animi, doloremque nisi inventore vel voluptatibus nulla dicta nam libero!",
-            timestamp: "30-11-2018",
-            avatar: "http://placekitten.com/200/200",
-            username: "Dummy user",
-            heart: 432,
-            comment: 654,
-            share: 23,
-        },
-    ],
     user: {
         public_key: 1,
         avatar: "http://placekitten.com/200/200",
         username: "Dummy user",
-    }
+    },
+    isInit: true,
 };
 
 export function postReducer(state = initialState, action) {
@@ -48,8 +19,12 @@ export function postReducer(state = initialState, action) {
                     ...state.posts,
                     {
                         id: action.id,
+                        type: action.type,
                         content: action.content,
-                        timestamp: action.timestamp,
+                        content_type: action.content_type,
+                        from: action.from,
+                        to: action.to,
+                        sequence: action.sequence,
                         avatar: action.avatar,
                         username: action.username,
                         heart: action.heart,
@@ -57,6 +32,10 @@ export function postReducer(state = initialState, action) {
                         share: action.share,
                     }
                 ]
+            })  
+        case LOAD_POST:
+            return Object.assign({}, state, {
+                posts: action.posts
             })
         default:
             return state;

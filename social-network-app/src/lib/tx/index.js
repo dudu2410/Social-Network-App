@@ -22,6 +22,7 @@ function encode(tx) {
 }
 
 function decode(data) {
+  console.log("AAAAAAAAAAAAAAAA");
   const versionTx = Transaction.decode(data);
   switch (versionTx.version) {
     case 1:
@@ -85,9 +86,9 @@ function decodePostContent(data) {
       return v1.decodePlainTextContent(data);
       break;
     default:
-      return {type: -1, text: ''};
+      throw Error('Unsupport content type');
   }
 }
+export {encode, decode, verify, sign, hash, encodePostContent, decodePostContent}
 
-
-module.exports = { encode, decode, verify, sign, hash, encodePostContent, decodePostContent };
+// module.exports = { encode, decode, verify, sign, hash, encodePostContent, decodePostContent };
