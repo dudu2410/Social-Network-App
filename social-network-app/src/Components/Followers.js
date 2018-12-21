@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import '.././Css/App.css'
 
-const Followers = ({ followers }) => {
-    console.log(followers);
+const Followers = ({current_user, loadFollowers,followers}) => {
+    loadFollowers(followers);
+
   return (
     <div className="background">
     <ul className="list-group">

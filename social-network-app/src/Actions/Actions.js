@@ -6,6 +6,7 @@ var {GetPKFromFK} = require('../lib/tx');
 export const ADD_POST = 'ADD_POST'; 
 export const ADD_FOLLOWERS = 'ADD_FOLLOWERS';
 export const LOAD_POST = 'LOAD_POST';
+export const LOAD_FOLLOWERS = 'LOAD_FOLLOWERS';
 export const CHANGE_CURRENT_VIEW_USER = 'CHANGE_CURRENT_VIEW_USER';
 
 
@@ -40,6 +41,13 @@ export function loadPosts(posts) {
     return {
         type: LOAD_POST,
         posts,
+    }
+}
+
+export function loadFollowers(followers) {
+    return {
+        type: LOAD_FOLLOWERS,
+        followers,
     }
 }
 

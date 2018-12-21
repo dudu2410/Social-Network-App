@@ -1,4 +1,4 @@
-import { ADD_FOLLOWERS } from '../Actions/Actions'
+import { ADD_FOLLOWERS,LOAD_FOLLOWERS } from '../Actions/Actions'
 
 const initialState = {
     followers: [
@@ -39,6 +39,10 @@ export default function followersReducer(state = initialState, action) {
                         username: action.username,
                     }
                 ]
+            })
+            case LOAD_FOLLOWERS:
+            return Object.assign({}, state, {
+                followers: action.followers
             })
             default:
 

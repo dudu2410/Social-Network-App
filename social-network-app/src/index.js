@@ -12,7 +12,6 @@ import { LoginPage } from './Containers/LoginPage'
 
 
 store.dispatch(changeCurrentViewUser('GAJQ47RMDTXYTCBMMW4A4DUMTB5RQLTGQZDMMABW6RTQJGKINJ4JTRTP'));
-
 const Index = () => (
   <Provider store={store}>
     <Router>
