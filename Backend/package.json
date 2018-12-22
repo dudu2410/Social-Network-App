@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@grpc/proto-loader": "^0.3.0",
+    "axios": "^0.18.0",
     "base32.js": "^0.1.0",
     "bluebird": "^3.5.3",
     "decimal.js": "^10.0.1",

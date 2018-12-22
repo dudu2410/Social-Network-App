@@ -55,6 +55,14 @@ const InteractParams = vstruct([
   // React if '', like, love, haha, anrgy, sad, wow
 ]);
 
+function decodeBase32(data){
+  return base32.decode(data);
+}
+
+function encodeBase32(data){
+  return base32.encode(data);
+}
+
 function encodePlainTextContent(content) {
   return PlainTextContent.encode(content);
 }
@@ -184,4 +192,6 @@ module.exports = {
   decodePlainTextContent,
   decodeFollowsValue,
   encodeFollowsValue,
+  decodeBase32,
+  encodeBase32
 };

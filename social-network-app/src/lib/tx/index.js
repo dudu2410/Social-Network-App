@@ -22,13 +22,10 @@ function encode(tx) {
 }
 
 function decode(data) {
-  console.log("AAAAAAAAAAAAAAAA");
   const versionTx = Transaction.decode(data);
   switch (versionTx.version) {
     case 1:
       return v1.decode(data);
-      break;
-
     default:
       throw Error('Unsupport version');
   }
@@ -80,11 +77,9 @@ function encodePostContent(content) {
 
 function decodePostContent(data) {
   const contentType = PostContent.decode(data);
-  console.log(contentType);
   switch (contentType.type) {
     case 1:
       return v1.decodePlainTextContent(data);
-      break;
     default:
       throw Error('Unsupport content type');
   }
