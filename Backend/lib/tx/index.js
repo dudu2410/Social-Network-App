@@ -78,7 +78,13 @@ function encodePostContent(content) {
 }
 
 function decodePostContent(data) {
-  const contentType = PostContent.decode(data);
+  const contentType = {};
+  try{
+    contentType = PostContent.decode(data);
+  }
+  catch(err){
+    return { type: -1, text: '' };
+  }
   switch (contentType.type) {
     case 1:
       return v1.decodePlainTextContent(data);

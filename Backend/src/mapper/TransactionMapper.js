@@ -18,7 +18,7 @@ var toSimpleTransactionInfo = (tx) => {
         content: '',
         content_type: '',
         from: '',
-        sequence: null,
+        sequence: 0,
     };
     switch (txjson.operation) {
         case POST_OPERATION: {
@@ -28,6 +28,7 @@ var toSimpleTransactionInfo = (tx) => {
             simpleTransactionInfo.content = postContent.text;
             simpleTransactionInfo.from = txjson.account;
             simpleTransactionInfo.sequence = txjson.sequence;
+            
             break;
         }
         case PAYMENT_OPERATION: {
@@ -36,6 +37,8 @@ var toSimpleTransactionInfo = (tx) => {
             simpleTransactionInfo.content = txjson.params;
             simpleTransactionInfo.from = txjson.account;
             simpleTransactionInfo.sequence = txjson.sequence;
+            console.log('END PAYMENT_OPERATION');
+
             break;
         }
         case CREATE_ACCOUNT_OPERATION: {
@@ -75,9 +78,11 @@ var toSimpleTransactionInfo = (tx) => {
                     txjson.params.value.toString('base64');
             simpleTransactionInfo.from = txjson.account;
             simpleTransactionInfo.sequence = txjson.sequence;
+
             break;
         }
         case INTERACT_OPERATION: {
+            console.log('INTERACT_OPERATION');
             break;
         }
         default: {
