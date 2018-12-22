@@ -45,6 +45,7 @@ export function loadPosts(posts) {
 }
 
 export function loadFollowers(followers) {
+    console.log("vo load fflow "+ followers);
     return {
         type: LOAD_FOLLOWERS,
         followers,

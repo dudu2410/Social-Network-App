@@ -6,12 +6,12 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import  store from './Store/MainStore'
 import AppCont from './Containers/AppContainer'
 import { Wall } from './Components/Wall'
-import FollowersContainer from './Containers/FollowersContainer';
+import  FollowingContainer  from './Containers/FollowingContainer'
 import {changeCurrentViewUser} from './Actions/Actions'
 import { LoginPage } from './Containers/LoginPage'
 
 
-store.dispatch(changeCurrentViewUser('GDMNG3PLGUMPHXPPMRZ7EQRMT34F4JU6574OZIQL3LIK5P76CVW5QMTL'));
+store.dispatch(changeCurrentViewUser('GDLLXAEH3MYZ3IYEE4JNVYPXXQDA5HY6JMVLU7UFNZJVY7CDVCURFED3'));
 
 const Index = () => (
   <Provider store={store}>
@@ -21,7 +21,7 @@ const Index = () => (
           <Route exact path="/" component={AppCont} />
           <Route path="/home" component={AppCont} />
           <Route path="/wall" component={Wall} />
-          <Route path="/followers" component={FollowersContainer} />
+          <Route path="/followers" component={FollowingContainer} />
           <Route path="/login" component={LoginPage} />
         </Switch>
       </Suspense>

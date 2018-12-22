@@ -3,7 +3,7 @@ import { App } from '../Components/App'
 import { loadPosts } from '../Actions/Actions'
 import { bindActionCreators } from 'redux'
 import axios from 'axios'
-
+console.log("1.vo app container");
 const mapStateToProps = state => {
     return {
         current_user: state.appReducer.current_user,
@@ -15,7 +15,7 @@ const mapDispatchToProps = (dispatch, ownProps) => bindActionCreators({
     loadPosts: (current_user) => () => {
         axios.get(`http://localhost:3002/get/transactions?address=${current_user}`)
             .then(res => {
-                console.log(res.data);
+                console.log("app du lieu " + res.data);
                 var posts = [];
                 res.data.forEach(simpleTxInfo => {
                     var post = {
@@ -33,6 +33,7 @@ const mapDispatchToProps = (dispatch, ownProps) => bindActionCreators({
                     };
                     posts.push(post);
                 });
+                console.log("Day la appconteianer "+ posts);
                 dispatch(loadPosts(posts));
                 // dispatch(
                 //     addPost(currentState.postReducer.user.id,

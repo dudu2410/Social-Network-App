@@ -1,28 +1,12 @@
 import { ADD_FOLLOWERS,LOAD_FOLLOWERS } from '../Actions/Actions'
 
 const initialState = {
-    followers: [
-        {
-            id: 1,
-            avatar: "http://placekitten.com/200/200",
-            username: "Dummy user",
-        },
-        {
-            id: 2,
-            avatar: "http://placekitten.com/200/200",
-            username: "Dummy user",
-        },
-        {
-            id: 3,
-            avatar: "http://placekitten.com/200/200",
-            username: "Dummy user",
-        },
-    ],
-    user: {
+    followers: [{
         public_key: 1,
         avatar: "http://placekitten.com/200/200",
         username: "Dummy user",
-    }
+    }],
+    isInit: true,
 };
 
 export default function followersReducer(state = initialState, action) {
@@ -41,12 +25,12 @@ export default function followersReducer(state = initialState, action) {
                 ]
             })
             case LOAD_FOLLOWERS:
+            console.log("assing loadfoolwer: " + action.followers.length)
             return Object.assign({}, state, {
                 followers: action.followers
             })
             default:
 
-            console.log("followrsReducer after: " + state)
             return state;
     }
 }

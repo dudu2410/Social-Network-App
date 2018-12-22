@@ -10,8 +10,9 @@ export const SemiHeader = ({followers,onFollowClick}) => {
     }
 console.log("oject: "+owner);
     return (
+        
         <ul>
-            <li className="space"><a>Posts</a></li>
+            <li className="space"><a href="/" style = {{color : "red"}}>Posts</a></li>
             <li><a href="/followers" style = {{color : "red"}}>Followers</a></li> 
             <li>
                 <a href="" style = {{color : "red"}} onClick={(e) => {onFollowClick(e, owner);}}>Follow</a>
@@ -20,5 +21,6 @@ console.log("oject: "+owner);
             <li><a>Lists</a></li>
             <li><a>Moments</a></li>
         </ul>
+        
     )
 }

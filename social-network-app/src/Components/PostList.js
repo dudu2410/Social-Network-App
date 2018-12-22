@@ -4,7 +4,7 @@ import '../Css/PostList.css'
 
 
 export const PostList = ({ posts }) => {
-    console.log(posts);
+    console.log("danh sach post"  +posts);
     if (posts === undefined) {
         return (
             <div className="background">
