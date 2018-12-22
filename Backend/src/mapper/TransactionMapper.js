@@ -88,4 +88,4 @@ var toSimpleTransactionInfo = (tx) => {
 
 }
 
-module.exports = { toSimpleTransactionInfo, UPDATE_ACCOUNT_OPERATION };
+module.exports = { toSimpleTransactionInfo, UPDATE_ACCOUNT_OPERATION,PAYMENT_OPERATION };
