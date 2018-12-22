@@ -10,7 +10,7 @@ import {changeCurrentViewUser} from './Actions/Actions'
 import { LoginPage } from './Containers/LoginPage'
 
 
-store.dispatch(changeCurrentViewUser('GAJQ47RMDTXYTCBMMW4A4DUMTB5RQLTGQZDMMABW6RTQJGKINJ4JTRTP'));
+store.dispatch(changeCurrentViewUser('GDMNG3PLGUMPHXPPMRZ7EQRMT34F4JU6574OZIQL3LIK5P76CVW5QMTL'));
 
 const Index = () => (
   <Provider store={store}>
