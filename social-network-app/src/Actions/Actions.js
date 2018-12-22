@@ -1,11 +1,7 @@
-var { decode } = require('../lib/tx');
-var {GetPKFromFK} = require('../lib/tx');
-
-
-
 export const ADD_POST = 'ADD_POST';
 export const LOAD_POST = 'LOAD_POST';
 export const CHANGE_CURRENT_VIEW_USER = 'CHANGE_CURRENT_VIEW_USER';
+export const LOGIN = 'LOGIN';
 
 
 export function addPost(id, type, content, content_type, sequence, from, avatar, username, heart, comment, share) {
@@ -39,13 +35,28 @@ export function changeCurrentViewUser(address) {
     }
 }
 
-export function login(data){
-    return dispatch => {
-        console.log(data.privatekey);  
-        var PublicKey = GetPKFromFK(data.privatekey);
-
-        
-
-        // return axios.get('http://localhost:3002/get/current_user_info?address=GDOU3TTWZ4BEQCUK5QTJ2WNFFN5S3JEUJOO7GA6SJJ5BVJWUAROCZISN');
+export function login(privatekey) {
+    return {
+        type: LOGIN,
+        privatekey,
     }
 }
+
+
+
+// export function login(data){
+//     return dispatch => {
+//         console.log(data.privatekey);  
+//         var PublicKey = GetPKFromFK(data.privatekey);
+
+        
+//         var getAccountAPI = `https://komodo.forest.network/tx_search?query="account=%27${PublicKey}%27"`;
+//         var result = axios.get(getAccountAPI);
+
+//         result.then( (res) => {
+//             console.log(res.data.result.total_count);
+//         });
+
+//         return result;
+//     }
+// }
