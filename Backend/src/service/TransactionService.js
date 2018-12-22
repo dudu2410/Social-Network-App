@@ -1,7 +1,7 @@
 "use strict";
 var axios = require('axios');
 var { decode, encode, sign, encodePostContent, decodePostContent, hash } = require("../../lib/tx");
-var { toSimpleTransactionInfo, UPDATE_ACCOUNT_OPERATION } = require("../mapper/TransactionMapper")
+var { toSimpleTransactionInfo, UPDATE_ACCOUNT_OPERATION, PAYMENT_OPERATION } = require("../mapper/TransactionMapper")
 var public_key = 'GDOU3TTWZ4BEQCUK5QTJ2WNFFN5S3JEUJOO7GA6SJJ5BVJWUAROCZISN';
 var test = 'GDMNG3PLGUMPHXPPMRZ7EQRMT34F4JU6574OZIQL3LIK5P76CVW5QMTL';
 var secret_key = 'SARWVDNIGLM53GQVP34DCG3DSF2FBTKOSMH422VWPXR2AUZH4DWR3KTV';
@@ -19,10 +19,9 @@ var getAccountTransactionsService = (address) => {
         axios.get(uri)
             .then((body) => {
                 var resultSet = [];
-                for (var i in body.data.result.txs) {
-                    var tx = body.data.result.txs[i];
+                body.data.result.txs.forEach(tx => {
                     resultSet.push(toSimpleTransactionInfo(tx));
-                }
+                });
                 resolve(resultSet);
             })
             .catch((err) => {
@@ -86,6 +85,7 @@ var getUserInfoService = (address) => {
                     picture: getLastestTransaction(updateAvtTxs) === null ? ANONYMOUS_AVT
                         : getLastestTransaction(updateAvtTxs).content,
                     followings: getAllFollowingsOfUser(result),
+                    currency: getCurrentCurrencyOfUser(result, address),
                 }
                 console.log(`result: ${userInfo.name} - ${userInfo.picture} `);
                 resolve(userInfo);
@@ -120,10 +120,37 @@ var getAllFollowingsOfUser = (txArray) => {
         return info.type === UPDATE_ACCOUNT_OPERATION && info.content_type === 'followings';
     });
     updateFollowingsTxs.forEach((tx) => {
-       followingsArray = followingsArray.concat(tx.content.addresses);
+        followingsArray = followingsArray.concat(tx.content.addresses);
     })
     followingsArray = getUniqueArray(followingsArray);
     return followingsArray;
+}
+
+//get Current currency of user
+var getCurrentCurrencyOfUser = (txArray, usrAddress) => {
+    var result = {
+        amount: 0
+    }
+    if (txArray.length === 0) {
+        return result;
+    }
+    var recieveCurrency = 0;
+    var sendCurrency = 0;
+    var paymentTxs = [];
+    paymentTxs = txArray.filter((info) => {
+        return info.type === PAYMENT_OPERATION;
+    });
+    paymentTxs.forEach((tx) => {
+        if (tx.from !== usrAddress) {
+            recieveCurrency += tx.content.amount;
+        }
+        if (tx.from === usrAddress) {
+            sendCurrency += tx.content.amount;
+        }
+    })
+    var currentCurrency = recieveCurrency - sendCurrency;
+    result.amount = currentCurrency;
+    return result;
 }
 
 //an util to get unique item array
