@@ -6,12 +6,13 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import  store from './Store/MainStore'
 import AppCont from './Containers/AppContainer'
 import { Wall } from './Components/Wall'
+import {App} from './Components/App'
 import  FollowingContainer  from './Containers/FollowingContainer'
 import {changeCurrentViewUser} from './Actions/Actions'
 import { LoginPage } from './Containers/LoginPage'
 
 
-store.dispatch(changeCurrentViewUser('GDLLXAEH3MYZ3IYEE4JNVYPXXQDA5HY6JMVLU7UFNZJVY7CDVCURFED3'));
+store.dispatch(changeCurrentViewUser('GAXVLYJUYND6QKGHK4FGM44XK3U77KJY54VTUJNIORYASOUOHWO63Q7Q'));
 
 const Index = () => (
   <Provider store={store}>

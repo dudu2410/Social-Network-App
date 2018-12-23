@@ -2,9 +2,10 @@ import { ADD_FOLLOWERS,LOAD_FOLLOWERS } from '../Actions/Actions'
 
 const initialState = {
     followers: [{
-        public_key: 1,
+        id: 1,
         avatar: "http://placekitten.com/200/200",
         username: "Dummy user",
+        key: '',
     }],
     isInit: true,
 };
@@ -21,6 +22,7 @@ export default function followersReducer(state = initialState, action) {
                         id: action.id,
                         avatar: action.avatar,
                         username: action.username,
+                        key: action.key,
                     }
                 ]
             })

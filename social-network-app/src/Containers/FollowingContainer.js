@@ -27,12 +27,13 @@ const mapDispatchToProps = (dispatch, ownProps) => bindActionCreators({
                                         id: simpleTxInfo.tx_hash,
                                         avatar: simpleTxInfo.picture,
                                         username: simpleTxInfo.name,
+                                        key: following,
                                     };
                                     await followers.push(follower);
-                                    console.log("log await 2");    
+                                    console.log("log await 2" + follower.id);    
                             })
                     });
-                    setTimeout(function(){ dispatch(loadFollowers(followers)); }, 5000);
+                    setTimeout(function(){ dispatch(loadFollowers(followers)); }, 1000);
                      
             })
     },
