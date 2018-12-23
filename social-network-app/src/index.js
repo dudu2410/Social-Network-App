@@ -10,13 +10,14 @@ import {App} from './Components/App'
 import  FollowingContainer  from './Containers/FollowingContainer'
 import {changeCurrentViewUser} from './Actions/Actions'
 import { LoginPage } from './Containers/LoginPage'
+import history from './history';
 
 
-store.dispatch(changeCurrentViewUser('GAXVLYJUYND6QKGHK4FGM44XK3U77KJY54VTUJNIORYASOUOHWO63Q7Q'));
+store.dispatch(changeCurrentViewUser('GAJQ47RMDTXYTCBMMW4A4DUMTB5RQLTGQZDMMABW6RTQJGKINJ4JTRTP'));
 
 const Index = () => (
   <Provider store={store}>
-    <Router>
+    <Router history={history}>
       <Suspense fallback={<div>Loading...</div>}>
         <Switch>
           <Route exact path="/" component={AppCont} />
