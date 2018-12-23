@@ -1,13 +1,16 @@
 import React from 'react'
+import axios from 'axios';
 import '../Css/LoginForm.css'
 import { Modal, Button } from 'react-bootstrap'
-import { login } from './../Actions/Actions'
-import axios from 'axios';
+import { connect } from 'react-redux'
+import * as Actions from './../Actions/Actions'
+import PropTypes from "prop-types";
+
 var {GetPKFromFK} = require('../lib/tx');
 
 class LoginForm extends React.Component {
-    constructor(props) {
-        super(props);
+    constructor(props, context) {
+        super(props, context);
         this.state = {
             privatekey: '',
             errors: {},
@@ -41,8 +44,8 @@ class LoginForm extends React.Component {
             {
                 this.setState({ isLogin: true });
                 localStorage.setItem("privatekey", this.state.privatekey );
-                Redirect("/home");
-                
+                this.props.onLogin(getLoginState(PublicKey));
+                this.context.router.history.push("/home");
             }
         }).catch(err => console.log('==err', err));
         }
@@ -54,6 +57,10 @@ class LoginForm extends React.Component {
     onChange(e) {
         this.setState({ [e.target.name]: e.target.value });
     };
+
+    static contextTypes = {
+        router: PropTypes.object
+    }
 
     render(){
         const { errors, privatekey, isLoading } =this.state;
@@ -79,20 +86,19 @@ class LoginForm extends React.Component {
         }
     }
     
-const mapsStateToProps = state => {
-
-}
-
-const mapDispatchToProps = (dispatch, props) => {
+function getLoginState (PublicKey){
     return {
-        toLogin: (privatekey) => {
-            dispatch(login(privatekey));
-        }
+        isLogin : true,
+        currentLogginAddress : PublicKey,
     }
 }
 
-function Redirect(link) {
-    window.location=link;
- }
+    const mapDispatchToProps = (dispatch,state) => {
+        return {
+            onLogin : (state) => {
+                dispatch(Actions.login(state));
+            }
+        }
+    }
 
-export default LoginForm;
+export default connect(null,mapDispatchToProps) (LoginForm);

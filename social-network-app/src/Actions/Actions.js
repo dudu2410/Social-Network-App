@@ -1,11 +1,10 @@
-
 export const ADD_FOLLOWERS = 'ADD_FOLLOWERS';
 export const ADD_POST = 'ADD_POST';
 export const LOAD_POST = 'LOAD_POST';
 export const LOAD_FOLLOWERS = 'LOAD_FOLLOWERS';
 export const CHANGE_CURRENT_VIEW_USER = 'CHANGE_CURRENT_VIEW_USER';
 export const LOGIN = 'LOGIN';
-
+export const LOGOUT = 'LOGOUT';
 
 export function addPost(id, type, content, content_type, sequence, from, avatar, username, heart, comment, share) {
     return {
@@ -56,13 +55,18 @@ export function changeCurrentViewUser(address) {
     }
 }
 
-export function login(privatekey) {
+export function login(state) {
     return {
         type: LOGIN,
-        privatekey,
+        state,
     }
 }
 
+export function logOut() {
+    return {
+        type: LOGOUT,
+    }
+}
 
 
 // export function login(data){

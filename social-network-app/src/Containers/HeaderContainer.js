@@ -1,10 +1,12 @@
 import { connect } from 'react-redux';
 import { Header } from '../Components/Header'
-import { addPost } from '../Actions/Actions'
+import { addPost, logOut } from '../Actions/Actions'
 import { bindActionCreators } from 'redux'
+
 
 const mapStateToProps = state => {
     return {
+        isLogin : state.appReducer.isLogin,
         user: state.postReducer.user
     }
 }
@@ -40,6 +42,9 @@ const mapDispatchToProps = (dispatch, ownProps) => bindActionCreators({
         //         currentState.postReducer.user.avatar,
         //         currentState.postReducer.user.username,
         //         0, 0, 0));
+    },
+    onLogOut: ()  => () => {
+        dispatch(logOut());
     },
 }, dispatch)
 
