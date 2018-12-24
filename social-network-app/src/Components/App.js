@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import AppNavBar from '../Containers/HeaderContainer';
 import PostListContainer from '../Containers/PostListContainer';
 import { Wall } from './Wall';

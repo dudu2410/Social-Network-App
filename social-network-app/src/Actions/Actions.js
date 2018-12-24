@@ -10,7 +10,7 @@ export function addPost(id, type, content, content_type, sequence, from, avatar,
     return {
         type: ADD_POST,
         id,
-        type,
+        // type,
         content,
         content_type,
         from,

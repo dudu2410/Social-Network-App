@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import '../Css/Semi-Header.css'
 
 export const SemiHeader = ({followers,onFollowClick}) => {
@@ -15,11 +15,11 @@ console.log("oject: "+owner);
             <li className="space"><a href="/" style = {{color : "red"}}>Posts</a></li>
             <li><a href="/followers" style = {{color : "red"}}>Followers</a></li> 
             <li>
-                <a href="" style = {{color : "red"}} onClick={(e) => {onFollowClick(e, owner);}}>Follow</a>
+                <a href="/followers" style = {{color : "red"}} onClick={(e) => {onFollowClick(e, owner);}}>Follow</a>
             </li>
-            <li><a>Likes</a></li>
-            <li><a>Lists</a></li>
-            <li><a>Moments</a></li>
+            <li><a href="/" style = {{color : "black"}}>Likes</a></li>
+            <li><a href="/" style = {{color : "black"}}>Lists</a></li>
+            <li><a href="/" style = {{color : "black"}}>Moments</a></li>
         </ul>
         
     )

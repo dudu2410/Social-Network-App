@@ -34,7 +34,7 @@ class LoginForm extends React.Component {
         axios.get(getAccountAPI)
         .then(res => {
             // Dont have user for this privatekey
-            if (res.data.result.total_count == 0)
+            if (res.data.result.total_count === '0')
             {
                 console.log("Tài khoản có privatekey tương ứng chưa được đăng ký.")
                 this.setState({ isLogin: false });
@@ -63,8 +63,6 @@ class LoginForm extends React.Component {
     }
 
     render(){
-        const { errors, privatekey, isLoading } =this.state;
-
         return (
             <div>
                 <Modal.Dialog>
