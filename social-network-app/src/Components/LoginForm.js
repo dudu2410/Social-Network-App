@@ -91,12 +91,12 @@ function getLoginState (PublicKey){
     }
 }
 
-    const mapDispatchToProps = (dispatch,state) => {
-        return {
-            onLogin : (state) => {
-                dispatch(Actions.login(state));
-            }
+const mapDispatchToProps = (dispatch,state) => {
+    return {
+        onLogin : (state) => {
+            dispatch(Actions.login(state));
         }
     }
+}
 
 export default connect(null,mapDispatchToProps) (LoginForm);
