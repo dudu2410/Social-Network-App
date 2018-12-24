@@ -5,7 +5,7 @@ import { Wall } from './Wall';
 import '../Css/App.css'
 console.log("2.vo  app");
 export const App = ({ current_user, loadPosts }) => {
-  console.log("curent user la:" + current_user);
+  console.log("curent user laqqqqqqqqqqqqqqqqqqqqqqqqqqqq:" + current_user);
   loadPosts(current_user);
   return (
     <div className="background">

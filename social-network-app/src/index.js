@@ -13,8 +13,8 @@ import { LoginPage } from './Containers/LoginPage'
 import history from './history';
 
 
-store.dispatch(changeCurrentViewUser('GAJQ47RMDTXYTCBMMW4A4DUMTB5RQLTGQZDMMABW6RTQJGKINJ4JTRTP'));
-
+store.dispatch(changeCurrentViewUser('GBOVRS6DWD56GOIEYHFFYRLUBCV3JPQXRZ7YY4B34IHK6KWO4MQXGNZF'));
+console.log("vo index me roi");
 const Index = () => (
   <Provider store={store}>
     <Router history={history}>
