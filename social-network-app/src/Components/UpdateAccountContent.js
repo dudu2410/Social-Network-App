@@ -5,6 +5,7 @@ import '../Css/Post.css'
 export const UpdateAccountContent = ({ content, contentType }) => {
     var exportContent;
     var updatePrefix;
+    console.log(contentType);
     switch (contentType) {
         case 'name':
             {
@@ -12,13 +13,14 @@ export const UpdateAccountContent = ({ content, contentType }) => {
                 exportContent = (<div>{updatePrefix}<span className='user-name-content'>{content}</span></div>);
                 break;
             }
+        case 'avatar':
         case 'picture':
             {
                 updatePrefix = 'Đã cập nhật ảnh đại diện ';
-                console.log(content);
+                var imgPrefix = content.includes('data') ? '' : 'data:image/jpeg;base64,';
                 exportContent = (<div>
                     <div>{updatePrefix}</div>
-                    <div><img src={'data:image/png;base64,' + content} alt='avatar' /></div>
+                    <div><img src={imgPrefix + content} alt='avatar' /></div>
                 </div>);
                 break;
             }

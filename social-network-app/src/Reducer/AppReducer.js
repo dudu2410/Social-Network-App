@@ -1,4 +1,4 @@
-import { CHANGE_CURRENT_VIEW_USER, LOGIN, LOGOUT } from '../Actions/Actions'
+import { CHANGE_CURRENT_VIEW_USER, LOGIN, LOGOUT, LOAD_CURRENT_VIEW_USER_INFO } from '../Actions/Actions'
 import history from '../history';
 var {GetPKFromFK} = require('../lib/tx');
 
@@ -6,26 +6,33 @@ var {GetPKFromFK} = require('../lib/tx');
 const initialState = {
     isLogin : localStorage.privatekey ? true : false,
     currentLogginAddress : localStorage.privatekey ? GetPKFromFK(localStorage.privatekey) : null,
-    currentViewAddress : 'GAO4J5RXQHUVVONBDQZSRTBC42E3EIK66WZA5ZSGKMFCS6UNYMZSIDBI',
+    currentViewAddress: localStorage.privatekey ? GetPKFromFK(localStorage.privatekey) : null,
 }
 
 export function appReducer(state = initialState, action) {
     switch (action.type) {
         case CHANGE_CURRENT_VIEW_USER:
             return Object.assign({}, state, {
-                current_user: action.address
+                currentViewAddress: action.address
             })
+        case LOAD_CURRENT_VIEW_USER_INFO: {
+            return Object.assign({}, state, {
+                currentViewUserInfo: action.currentViewUserInfo
+            })
+        }
         case LOGIN:
             history.push('/home');
-            state.isLogin = action.state.isLogin;
-            state.currentLogginAddress = action.state.currentLogginAddress;
-            console.log(state);
-            return Object.assign({}, state);
+            return Object.assign({}, state,{
+                isLogin: action.state.isLogin,
+                currentLogginAddress: action.state.currentLogginAddress,
+                currentViewAddress: action.state.currentViewAddress,
+            });
         case LOGOUT:
-            state.isLogin = false;
-            state.currentLogginAddress = null;
             localStorage.removeItem('privatekey');
-            return Object.assign({}, state);
+            return Object.assign({}, state,{
+                isLogin: false,
+                currentLogginAddress: null,
+            });
         default:
             return state;
     }

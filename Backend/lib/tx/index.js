@@ -78,11 +78,12 @@ function encodePostContent(content) {
 }
 
 function decodePostContent(data) {
-  const contentType = {};
+  var contentType = {};
   try{
     contentType = PostContent.decode(data);
   }
   catch(err){
+    console.log(err);
     return { type: -1, text: '' };
   }
   switch (contentType.type) {

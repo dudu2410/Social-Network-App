@@ -2,20 +2,18 @@ import React from 'react';
 import AppNavBar from '../Containers/HeaderContainer';
 import PostListContainer from '../Containers/PostListContainer';
 import { Wall } from './Wall';
-import InforUser from './InforUser';
 import '../Css/App.css'
 import { Redirect } from 'react-router';
 console.log("2.vo  app");
-export const App = ({ current_user, loadPosts }) => {
+export const App = ({ currentViewAddress, loadPosts }) => {
   
   if (localStorage.privatekey){
-    console.log("curent user la:" + current_user);
-    loadPosts(current_user);  
+    console.log("curent user la:" + currentViewAddress);
+    loadPosts(currentViewAddress);  
     return (    
       <div className="background">
         <AppNavBar />
         <Wall/>
-        <InforUser/>
         <div className="container">
           <PostListContainer />
         </div>

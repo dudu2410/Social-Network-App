@@ -1,40 +1,52 @@
 import React from 'react'
 import '../Css/Post.css'
-import {TextContent} from './TextContent'
-import {UpdateAccountContent} from './UpdateAccountContent'
-export const Post = ({post}) => {
-  var postContent;
-  switch (post.type){
-    case  'post':
-    {
-      postContent = <TextContent content={post.content} contentType = {post.content_type}/>
-      break;
-    }
-    case 'update_account':
-    {
-      postContent = <UpdateAccountContent content={post.content} contentType = {post.content_type}/>
-      break;
-    }
-    default:
-    {
-      postContent = <div/>
-      break;
-    }
+import { TextContent } from './TextContent'
+import { UpdateAccountContent } from './UpdateAccountContent'
+import { PaymentContent } from './PaymentContent'
 
+export const Post = ({ post, userInfo }) => {
+  var postContent;
+  switch (post.type) {
+    case 'post':
+      {
+        postContent = <TextContent content={post.content} contentType={post.content_type} />
+        break;
+      }
+    case 'update_account':
+      {
+        postContent = <UpdateAccountContent content={post.content} contentType={post.content_type} />
+        break;
+      }
+    case 'payment':
+      {
+        console.log(post);
+        postContent = <PaymentContent content={post.content} contentType={post.content_type} from={post.from} current_view_address={post.current_view_address} />
+        break;
+      }
+    default:
+      {
+        postContent = <div />
+        break;
+      }
   }
+  var usernameTag = <div className='loader small-loader tweetEntry-fullname' />
+  var imgTag = <div className='loader small-loader tweetEntry-avatar' />
+  if (userInfo !== undefined) {
+    var imgPrefix = userInfo.avatar.includes('data') ? '' : 'data:image/jpeg;base64,';
+    usernameTag = userInfo.username;
+    imgTag = <img className="tweetEntry-avatar" src={imgPrefix + userInfo.avatar} alt="" /> 
+  }
+
   return (
     <div id={post.id} className="space-top">
       <div className="tweetEntry-tweetHolder">
         <div className="tweetEntry">
           <div className="tweetEntry-content">
             <a className="tweetEntry-account-group" href="[accountURL]">
-              <img className="tweetEntry-avatar" src="http://placekitten.com/200/200" alt="" />
+              {imgTag}
               <strong className="tweetEntry-fullname">
-                {post.username} <img src="./../Social-Network-App/social-network-app/src/Icons/check.png" alt="" className="icon_check" />
+                {usernameTag} <img src="./../Social-Network-App/social-network-app/src/Icons/check.png" alt="" className="icon_check" />
               </strong>
-              <span className="tweetEntry-username">
-                @<b>{post.username}</b>
-              </span>
             </a>
             <div className="tweetEntry-text-container">{postContent}</div>
           </div>
