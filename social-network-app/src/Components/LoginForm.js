@@ -29,7 +29,7 @@ class LoginForm extends React.Component {
         // Check privatekey format true ?
         try {
             PublicKey = GetPKFromFK(this.state.privatekey);
-            var getAccountAPI = `https://komodo.forest.network/tx_search?query="account=%27${PublicKey}%27"`;
+            var getAccountAPI = `https://zebra.forest.network/tx_search?query="account=%27${PublicKey}%27"`;
 
         axios.get(getAccountAPI)
         .then(res => {
@@ -88,6 +88,7 @@ function getLoginState (PublicKey){
     return {
         isLogin : true,
         currentLogginAddress : PublicKey,
+        currentViewAddress: PublicKey,
     }
 }
 

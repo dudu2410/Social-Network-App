@@ -34,7 +34,6 @@ body {
   
   .tweetEntry {
     border-bottom: 1px solid #e1e8ed;
-    cursor: pointer;
     min-height: 51px;
     padding: 9px 12px;
   }
@@ -107,3 +106,17 @@ body {
     margin-top: 20px;
   }
   
+  .currency {
+    color: orangered;
+    font-weight: bold;
+  }
+
+  .user-link {
+    color: #0984e3;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  .user-link:hover {
+    opacity: 0.8;
+  }

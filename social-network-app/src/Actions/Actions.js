@@ -3,6 +3,8 @@ export const ADD_POST = 'ADD_POST';
 export const LOAD_POST = 'LOAD_POST';
 export const LOAD_FOLLOWERS = 'LOAD_FOLLOWERS';
 export const CHANGE_CURRENT_VIEW_USER = 'CHANGE_CURRENT_VIEW_USER';
+export const LOAD_CURRENT_VIEW_USER_INFO = 'LOAD_CURRENT_VIEW_USER_INFO';
+
 export const LOGIN = 'LOGIN';
 export const LOGOUT = 'LOGOUT';
 
@@ -52,6 +54,14 @@ export function changeCurrentViewUser(address) {
     return {
         type: CHANGE_CURRENT_VIEW_USER,
         address,
+    }
+}
+
+export function loadCurrentViewUserInfo(currentViewUserInfo){
+    console.log("sdfjkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk");
+    return {
+        type: LOAD_CURRENT_VIEW_USER_INFO,
+        currentViewUserInfo
     }
 }
 

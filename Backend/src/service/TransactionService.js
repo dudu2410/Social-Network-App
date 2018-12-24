@@ -6,6 +6,11 @@ var public_key = 'GDOU3TTWZ4BEQCUK5QTJ2WNFFN5S3JEUJOO7GA6SJJ5BVJWUAROCZISN';
 var test = 'GDMNG3PLGUMPHXPPMRZ7EQRMT34F4JU6574OZIQL3LIK5P76CVW5QMTL';
 var secret_key = 'SARWVDNIGLM53GQVP34DCG3DSF2FBTKOSMH422VWPXR2AUZH4DWR3KTV';
 var getAccountTransactionAPI = 'https://komodo.forest.network/tx_search';
+const server1 = 'https://komodo.forest.network';
+const server2 = 'https://zebra.forest.network';
+const server3 = 'https://dragonfly.forest.network';
+const server4 = 'https://gorilla.forest.network';
+const current_server = server2;
 const commitTransaction = (tx) => {
     return `https://komodo.forest.network/broadcast_tx_commit?tx=0x${tx}`;
 }
@@ -15,7 +20,7 @@ const ANONYMOUST_NAME = 'Anonymous'
 var getAccountTransactionsService = (address) => {
     return new Promise((resolve, rejects) => {
         console.log(`getting all transaction of address ${address}`);
-        var uri = `https://komodo.forest.network/tx_search?query="account=%27${address}%27"`;
+        var uri = `${current_server}/tx_search?query="account=%27${address}%27"`;
         axios.get(uri)
             .then((body) => {
                 var resultSet = [];
@@ -34,7 +39,7 @@ var getAccountTransactionsService = (address) => {
 var getCurrentTransactionSequenceService = (address) => {
     return new Promise((resolve, rejects) => {
         console.log(`getting current transaction sequence of address ${address}`);
-        var uri = `https://komodo.forest.network/tx_search?query="account=%27${address}%27"`;
+        var uri = `${current_server}/tx_search?query="account=%27${address}%27"`;
         axios.get(uri)
             .then((body) => {
                 var result = [];
@@ -62,7 +67,7 @@ var getCurrentTransactionSequenceService = (address) => {
 var getUserInfoService = (address) => {
     return new Promise((resolve, rejects) => {
         console.log(`getting user info of address ${address}`);
-        var uri = `https://komodo.forest.network/tx_search?query="account=%27${address}%27"`;
+        var uri = `${current_server}/tx_search?query="account=%27${address}%27"`;
         axios.get(uri)
             .then((body) => {
                 var result = [];

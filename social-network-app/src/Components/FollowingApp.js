@@ -11,7 +11,7 @@ const FollowingApp = ({ current_user, loadFollowers }) => {
     <div className="background">
       <AppNavBar />
       <Wall />
-      <div className="container">
+      <div className="container follower-container">
         <FollowersContainer />
       </div>
     </div>

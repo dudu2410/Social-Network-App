@@ -6,7 +6,7 @@ import axios from 'axios';
 console.log("1.vo following container");
 const mapStateToProps = state => {
     return {
-        current_user: state.appReducer.current_user,
+        current_user: state.appReducer.currentViewAddress,
     }
 }
 

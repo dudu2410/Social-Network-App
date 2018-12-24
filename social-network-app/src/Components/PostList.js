@@ -3,11 +3,11 @@ import { Post } from '../Components/Post'
 import '../Css/PostList.css'
 
 
-export const PostList = ({ posts }) => {
-    console.log("danh sach post"  +posts);
+export const PostList = ({ posts, currentViewUserInfo }) => {
     if (posts === undefined) {
         return (
-            <div className="background">
+            <div className='container loader-container'>
+                <div className="loader big-loader"/>
             </div>
         );
     }
@@ -15,7 +15,7 @@ export const PostList = ({ posts }) => {
         <div className="background">
             <ul>
                 {posts.map((post, index) => (
-                    <Post key={post.id} post = {post} />
+                    <Post key={post.id} post = {post} userInfo={currentViewUserInfo}/>
                 ))}
             </ul>
         </div>
