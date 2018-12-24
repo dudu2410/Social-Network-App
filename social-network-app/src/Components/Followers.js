@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import '.././Css/App.css'
 import {changeCurrentViewUser} from '../Actions/Actions'
 import  store from '../Store/MainStore'

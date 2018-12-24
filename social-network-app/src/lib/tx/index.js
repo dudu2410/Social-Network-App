@@ -18,7 +18,7 @@ function encode(tx) {
 
     default:
       throw Error('Unsupport version');
-  };
+  }
 }
 
 function decode(data) {

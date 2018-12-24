@@ -1,10 +1,14 @@
 import { connect } from 'react-redux';
 import { Header } from '../Components/Header'
-import { addPost } from '../Actions/Actions'
+import { logOut } from '../Actions/Actions'
 import { bindActionCreators } from 'redux'
+// import { addPost } from '../Actions/Actions'
+
+
 
 const mapStateToProps = state => {
     return {
+        isLogin : state.appReducer.isLogin,
         user: state.postReducer.user
     }
 }
@@ -30,8 +34,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = (dispatch, ownProps) => bindActionCreators({
     onPostClick: (event, input) => (_, getState) => {
         event.preventDefault() // <-- control the event
-        var today = new Date().getDate();
-        var currentState = getState();
+        // var today = new Date().getDate();
+        // var currentState = getState();
         console.log(input);
         // dispatch(
         //     addPost(currentState.postReducer.user.id,
@@ -40,6 +44,9 @@ const mapDispatchToProps = (dispatch, ownProps) => bindActionCreators({
         //         currentState.postReducer.user.avatar,
         //         currentState.postReducer.user.username,
         //         0, 0, 0));
+    },
+    onLogOut: ()  => () => {
+        dispatch(logOut());
     },
 }, dispatch)
 

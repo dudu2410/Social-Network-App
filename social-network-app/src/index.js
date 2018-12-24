@@ -6,7 +6,6 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import  store from './Store/MainStore'
 import AppCont from './Containers/AppContainer'
 import { Wall } from './Components/Wall'
-import {App} from './Components/App'
 import  FollowingContainer  from './Containers/FollowingContainer'
 import {changeCurrentViewUser} from './Actions/Actions'
 import { LoginPage } from './Containers/LoginPage'

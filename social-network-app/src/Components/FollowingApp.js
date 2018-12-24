@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import AppNavBar from '../Containers/HeaderContainer';
 import FollowersContainer from '../Containers/FollowersContainer';
 import { Wall } from './Wall';

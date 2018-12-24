@@ -1,13 +1,16 @@
 import React from 'react'
+import axios from 'axios';
 import '../Css/LoginForm.css'
 import { Modal, Button } from 'react-bootstrap'
-import { login } from './../Actions/Actions'
-import axios from 'axios';
+import { connect } from 'react-redux'
+import * as Actions from './../Actions/Actions'
+import PropTypes from "prop-types";
+
 var {GetPKFromFK} = require('../lib/tx');
 
 class LoginForm extends React.Component {
-    constructor(props) {
-        super(props);
+    constructor(props, context) {
+        super(props, context);
         this.state = {
             privatekey: '',
             errors: {},
@@ -31,7 +34,7 @@ class LoginForm extends React.Component {
         axios.get(getAccountAPI)
         .then(res => {
             // Dont have user for this privatekey
-            if (res.data.result.total_count == 0)
+            if (res.data.result.total_count === '0')
             {
                 console.log("Tài khoản có privatekey tương ứng chưa được đăng ký.")
                 this.setState({ isLogin: false });
@@ -41,8 +44,8 @@ class LoginForm extends React.Component {
             {
                 this.setState({ isLogin: true });
                 localStorage.setItem("privatekey", this.state.privatekey );
-                Redirect("/home");
-                
+                this.props.onLogin(getLoginState(PublicKey));
+                this.context.router.history.push("/home");
             }
         }).catch(err => console.log('==err', err));
         }
@@ -55,9 +58,11 @@ class LoginForm extends React.Component {
         this.setState({ [e.target.name]: e.target.value });
     };
 
-    render(){
-        const { errors, privatekey, isLoading } =this.state;
+    static contextTypes = {
+        router: PropTypes.object
+    }
 
+    render(){
         return (
             <div>
                 <Modal.Dialog>
@@ -79,20 +84,19 @@ class LoginForm extends React.Component {
         }
     }
     
-const mapsStateToProps = state => {
-
+function getLoginState (PublicKey){
+    return {
+        isLogin : true,
+        currentLogginAddress : PublicKey,
+    }
 }
 
-const mapDispatchToProps = (dispatch, props) => {
+const mapDispatchToProps = (dispatch,state) => {
     return {
-        toLogin: (privatekey) => {
-            dispatch(login(privatekey));
+        onLogin : (state) => {
+            dispatch(Actions.login(state));
         }
     }
 }
 
-function Redirect(link) {
-    window.location=link;
- }
-
-export default LoginForm;
+export default connect(null,mapDispatchToProps) (LoginForm);

@@ -1,14 +1,30 @@
-import React, { Component } from 'react'
+import React from 'react'
 import '../Css/Header.css'
-import { addPost } from '../Actions/Actions';
+import { Link } from 'react-router-dom'
 
-export const Header = ({ user, onPostClick }) => {
+
+export const Header = ({ user, isLogin, onPostClick, onLogOut }) => {
     console.log("ham post:"+onPostClick)
     var input;
+
+    let button;
+
+    console.log(isLogin);
+    if (!isLogin) {
+        button = <Link to="/login"><button className="btn btn-primary">Log In</button></Link>
+    } else {
+        button = <button type="button" className="btn btn-primary" onClick={() => {
+                            onLogOut();
+                        }}>
+                Log Out
+                </button>
+    }
+
     return (
         <nav className="navbar justify-content-between navbar-dark bg-primary">
             <div>App name</div>
             <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#exampleModal">New post</button>
+            {button}
             <div className="modal fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div className="modal-dialog" role="document">
                     <div className="modal-content">
