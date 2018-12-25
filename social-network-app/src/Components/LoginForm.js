@@ -1,7 +1,7 @@
 import React from 'react'
 import axios from 'axios';
 import '../Css/LoginForm.css'
-import { Modal, Button } from 'react-bootstrap'
+import { Modal, Button, Alert } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import * as Actions from './../Actions/Actions'
 import PropTypes from "prop-types";
@@ -13,7 +13,7 @@ class LoginForm extends React.Component {
         super(props, context);
         this.state = {
             privatekey: '',
-            errors: {},
+            errors: '',
             isLoading: false,
             isLogin: false,
         };
@@ -36,6 +36,7 @@ class LoginForm extends React.Component {
             // Dont have user for this privatekey
             if (res.data.result.total_count === '0')
             {
+                this.setState({errors : "Tài khoản có privatekey tương ứng chưa được đăng ký."})
                 console.log("Tài khoản có privatekey tương ứng chưa được đăng ký.")
                 this.setState({ isLogin: false });
                 localStorage.removeItem('privatekey');
@@ -50,6 +51,7 @@ class LoginForm extends React.Component {
         }).catch(err => console.log('==err', err));
         }
         catch (err) {
+            this.setState({errors : "Privatekey không đúng định dạng."})
             console.log("Lỗi privatekey");
         }        
     };
@@ -65,20 +67,33 @@ class LoginForm extends React.Component {
     render(){
         return (
             <div>
-                <Modal.Dialog>
-                    <Modal.Header>
-                        <Modal.Title>Login</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <form onSubmit={this.onSubmit}>
-                            <label>
-                                Your Private Key:
-                                <input type="password" name="privatekey" className="input-box" onChange={this.onChange}/>
-                            </label>
-                            <Button type="submit" bsStyle="info" >Login</Button>
-                        </form>
-                    </Modal.Body>
-                </Modal.Dialog>
+                <div>
+                    <Modal.Dialog>
+                        <Modal.Header>
+                            <Modal.Title>Login</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <form onSubmit={this.onSubmit}>
+                                <label>
+                                    Your Private Key:
+                                    <input type="password" name="privatekey" className="input-box" onChange={this.onChange}/>
+                                </label>
+                                <Button type="submit" bsStyle="info" >Login</Button>
+                            </form>
+                        </Modal.Body>
+                    </Modal.Dialog>                
+                </div>
+                <div className="warning_dialog">
+
+                {(this.state.errors === "") ? (
+                    <div></div>
+                ) : (
+                    <Alert bsStyle="warning">
+                        <strong>{this.state.errors}</strong>
+                    </Alert>
+                )}
+                
+                </div>
             </div>
             );
         }

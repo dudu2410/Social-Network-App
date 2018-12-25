@@ -1,7 +1,7 @@
 import React from 'react';
 import AppNavBar from '../Containers/HeaderContainer';
 import FollowersContainer from '../Containers/FollowersContainer';
-import { Wall } from './Wall';
+import  Wall  from './Wall';
 import '../Css/App.css'
 console.log("2.vo following app");
 const FollowingApp = ({ current_user, loadFollowers }) => {
