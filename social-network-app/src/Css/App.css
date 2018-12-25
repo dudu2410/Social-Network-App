@@ -1,8 +1,8 @@
 .background{
-    background: #DCDCDC;
+    /* background: #DCDCDC; */
 }
 .container{
-    width: 620px;
+    width: 700px !important;
 }
 .loader-container {
     min-height: 700px;
@@ -48,3 +48,11 @@
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
   }
+
+.float_left{
+    position: sticky;
+    width: 320px;
+    float: left;
+    padding-top: 20px;
+    padding-left: 60px;
+}

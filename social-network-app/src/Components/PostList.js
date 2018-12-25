@@ -12,8 +12,8 @@ export const PostList = ({ posts, currentViewUserInfo }) => {
         );
     }
     return (
-        <div className="background">
-            <ul>
+        <div className="postlist">
+            <ul className="background_postlist">
                 {posts.map((post, index) => (
                     <Post key={post.id} post = {post} userInfo={currentViewUserInfo}/>
                 ))}

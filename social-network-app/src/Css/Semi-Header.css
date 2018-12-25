@@ -1,7 +1,7 @@
 ul {
     list-style-type: none;
     overflow: hidden;
-    background-color: #FFFFFF;
+    background-color: #DCDCDC;
     width: 100%;
   }
 li {
@@ -15,7 +15,7 @@ li a {
     text-decoration: none;
 }
 li a:hover:not(.active) {
-    background-color: #CFCFCF;
+    background-color: white;
 }
 .space {
     margin-left: 360px;

@@ -2,3 +2,9 @@ ul {
     padding: 0;
     margin: 0;
 }
+.background_postlist{
+    background: white !important;
+    width: 100% !important;
+}
+.postlist{
+}

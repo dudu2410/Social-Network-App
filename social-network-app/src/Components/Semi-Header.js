@@ -11,7 +11,6 @@ export const SemiHeader = ({followers,onFollowClick}) => {
     }
 console.log("oject: "+owner);
     return (
-        
         <ul>
             <Link to="/"><li className="space"><a href='' style = {{color : "red"}}>Posts</a></li></Link>
             <Link to="/followers"><li><a href='' style = {{color : "red"}}>Followers</a></li></Link> 

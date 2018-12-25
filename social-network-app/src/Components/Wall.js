@@ -10,7 +10,7 @@ class Wall extends React.Component {
         var imgTag = <div className='loader small-loader tweetEntry-avatar' />
 
         if (this.props.userInfor === undefined){
-            userInfor = "Khách vãng lai"
+            userInfor = "Tài khoản chưa đăng nhập"
         }else{
             console.log("DEFINED")
             console.log(this.props.userInfor)
@@ -41,7 +41,6 @@ class Wall extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state.appReducer.currentViewUserInfo)
     return {
         userInfor: state.appReducer.currentViewUserInfo,
     }
