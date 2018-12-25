@@ -16,13 +16,14 @@ server.listen(3002);
 console.log('server listening on port 3002');
 
 
+app.post("/", function (req, res) {
+    console.log(req.body);
+    console.log(res.body);
+});
 app.get("/", function (req, res) {
     res.setHeader('Content-Type', 'application/json');
-    res.send(JSON.stringify({ a: 1 }, null, 3));
-});
-app.get("/vidu", function (req, res) {
-    res.setHeader('Content-Type', 'application/json');
-    res.send("Day la send chuoi");
+    console.log(req.status);
+console.log(req.responseText);
 });
 
 //this is test service
