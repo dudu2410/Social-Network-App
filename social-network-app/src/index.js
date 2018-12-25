@@ -5,15 +5,12 @@ import * as serviceWorker from './serviceWorker';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import  store from './Store/MainStore'
 import AppCont from './Containers/AppContainer'
-import { Wall } from './Components/Wall'
+import  Wall  from './Components/Wall'
 import  FollowingContainer  from './Containers/FollowingContainer'
-import {changeCurrentViewUser} from './Actions/Actions'
+// import {changeCurrentViewUser} from './Actions/Actions'
 import { LoginPage } from './Containers/LoginPage'
 import history from './history';
 
-
-store.dispatch(changeCurrentViewUser('GBOVRS6DWD56GOIEYHFFYRLUBCV3JPQXRZ7YY4B34IHK6KWO4MQXGNZF'));
-console.log("vo index me roi");
 const Index = () => (
   <Provider store={store}>
     <Router history={history}>
