@@ -14,7 +14,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (dispatch, ownProps) => bindActionCreators({
     loadPosts: (currentViewAddress) => () => {
-        axios.get(`http://localhost:3002/get/transactions?address=${currentViewAddress}`)
+        axios.get(`http://localhost:8888/get/post?address=${currentViewAddress}`)
             .then((res) => {
                 var posts = [];
                 res.data.forEach(simpleTxInfo => {
@@ -34,7 +34,7 @@ const mapDispatchToProps = (dispatch, ownProps) => bindActionCreators({
                     posts.push(post);
                 });
                 dispatch(loadPosts(posts));
-                return axios.get(`http://localhost:3002/get/current_user_info?address=${currentViewAddress}`);
+                return axios.get(`http://localhost:8888/get/current_user_info?address=${currentViewAddress}`);
 
             }).then((res) => {
                 var currentViewUserInfo = {

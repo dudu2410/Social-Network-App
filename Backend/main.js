@@ -1,5 +1,9 @@
 
-var { getAccountTransactionsService, getCurrentTransactionSequenceService, getUserInfoService } = require("./src/service/TransactionService");
+var { getAccountTransactionsService,
+     getCurrentTransactionSequenceService,
+    getUserInfoService,
+    getCurrentBlockHeightService ,
+    getAllTransactionOfBlockByHeightService} = require("./src/service/TransactionService");
 var express = require("express");
 var app = express();
 var server = require("http").createServer(app);
@@ -97,6 +101,33 @@ app.get("/get/current_user_info", function (req, res) {
         'Access-Control-Allow-Origin': '*'
     });
     getUserInfoService(req.query.address)
+        .then((result) => {
+            res.send(result);
+        }).catch((err) => {
+            res.send(err);
+        })
+});
+
+app.get("/get/current_block_height", function (req, res) {
+    res.set({
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
+    });
+    getCurrentBlockHeightService()
+        .then((result) => {
+            res.send(result);
+        }).catch((err) => {
+            res.send(err);
+        })
+});
+
+
+app.get("/get/transaction_of_block", function (req, res) {
+    res.set({
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
+    });
+    getAllTransactionOfBlockByHeightService(req.query.height)
         .then((result) => {
             res.send(result);
         }).catch((err) => {
