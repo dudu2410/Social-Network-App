@@ -21,4 +21,6 @@ public interface UserTransactionRepositoryCustom {
     List<UserTransaction> getAllFollowingTransaction(String address);
 
     List<UserTransaction> getByTxHash(String txHash);
+
+    Long getHeartNumberOfTx(String txHash);
 }
