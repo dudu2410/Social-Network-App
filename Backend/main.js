@@ -1,24 +1,30 @@
 
 var { getAccountTransactionsService, getCurrentTransactionSequenceService, getUserInfoService } = require("./src/service/TransactionService");
 var express = require("express");
+var {encodePostContent,sign,encode} = require("./lib/tx/index");
 var app = express();
 var server = require("http").createServer(app);
 var request = require('request');
+const bodyParser = require('body-parser')
 
 var public_key = 'GAO4J5RXQHUVVONBDQZSRTBC42E3EIK66WZA5ZSGKMFCS6UNYMZSIDBI';
 var test = 'GDMNG3PLGUMPHXPPMRZ7EQRMT34F4JU6574OZIQL3LIK5P76CVW5QMTL';
 var secret_key = 'SARWVDNIGLM53GQVP34DCG3DSF2FBTKOSMH422VWPXR2AUZH4DWR3KTV';
 var getAccountTransactionAPI = `https://komodo.forest.network/tx_search?query="account=%27${test}%27"`;
 const commitTransaction = (tx) => {
-    return `https://komodo.forest.network/broadcast_tx_commit?tx=0x${tx}`;
+    return `https://komodo.forest.network/broadcast_tx_commit?tx=${tx}`;
 }
 server.listen(3002);
 console.log('server listening on port 3002');
 
+app.use(bodyParser.urlencoded({
+    extended: true
+  }))
+  
+app.use(bodyParser.json())
 
 app.post("/", function (req, res) {
-    console.log(req.body);
-    console.log(res.body);
+    console.log(req.body.todo);
 });
 app.get("/", function (req, res) {
     res.setHeader('Content-Type', 'application/json');
@@ -27,34 +33,10 @@ console.log(req.responseText);
 });
 
 //this is test service
-app.get("/post", function (req, res) {
-
-
-    const content = {
-        type: 'text',
-        text: "Post testing!"
-    }
-
-    const postParams = {
-        content: encodePostContent(content),
-        keys: [],
-    }
-
-    const Transaction = {
-        version: 1,
-        account: public_key,
-        sequence: 1,
-        memo: Buffer.alloc(0),
-        operation: 'post',
-        params: postParams
-    }
-    sign(Transaction, secret_key);
-    var txEncoded = encode(Transaction).toString('hex').toUpperCase();
-    // var txDecoded = decode(txEncoded);
+app.post("/post", function (req, res) {
     res.setHeader('Content-Type', 'application/json');
-    request(commitTransaction(txEncoded), (err, response, body) => {
-        console.log(commitTransaction(txEncoded));
-        console.log(err);
+    request(commitTransaction(req.body.txEncoded), (err, response, body) => {
+        console.log(commitTransaction(req.body.txEncoded));
         res.send(body);
     })
 });

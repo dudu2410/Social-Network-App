@@ -5,6 +5,7 @@ import * as serviceWorker from './serviceWorker';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import  store from './Store/MainStore'
 import AppCont from './Containers/AppContainer'
+import NewsFeedContainer from './Containers/NewsFeedContainer'
 import  Wall  from './Components/Wall'
 import  FollowingContainer  from './Containers/FollowingContainer'
 // import {changeCurrentViewUser} from './Actions/Actions'
@@ -16,8 +17,9 @@ const Index = () => (
     <Router history={history}>
       <Suspense fallback={<div>Loading...</div>}>
         <Switch>
-          <Route exact path="/" component={AppCont} />
-          <Route path="/home" component={AppCont} />
+          <Route exact path="/" component={NewsFeedContainer} />
+          <Route path="/home" component={NewsFeedContainer} />
+          <Route path="/newsfeed" component={AppCont} />
           <Route path="/wall" component={Wall} />
           <Route path="/followers" component={FollowingContainer} />
           <Route path="/login" component={LoginPage} />

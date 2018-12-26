@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-import { App } from '../Components/App'
 import { loadPosts, loadCurrentViewUserInfo } from '../Actions/Actions'
+import { App } from '../Components/App'
 import { bindActionCreators } from 'redux'
 import axios from 'axios'
 import { SemiHeader } from '../Components/Semi-Header';
@@ -9,47 +9,12 @@ import { SemiHeader } from '../Components/Semi-Header';
 const mapStateToProps = state => {
     return {
         currentViewAddress: state.appReducer.currentViewAddress,
-        isNewFeed : true,
+        isNewFeed: true,
     }
 }
 
 
 const mapDispatchToProps = (dispatch, ownProps) => bindActionCreators({
-    loadPosts: (currentViewAddress) => () => {
-        axios.get(`http://localhost:3002/get/transactions?address=${currentViewAddress}`)
-            .then((res) => {
-                var posts = [];
-                res.data.forEach(simpleTxInfo => {
-                    console.log(simpleTxInfo);
-                    var post = {
-                        id: simpleTxInfo.tx_hash,
-                        type: simpleTxInfo.type,
-                        content: simpleTxInfo.content,
-                        content_type: simpleTxInfo.content_type,
-                        from: simpleTxInfo.from,
-                        sequence: simpleTxInfo.sequence,
-                        heart: '',
-                        comment: '',
-                        share: '',
-                        current_view_address: currentViewAddress,
-                    };
-                    posts.push(post);
-                });
-                dispatch(loadPosts(posts));
-                return axios.get(`http://localhost:3002/get/current_user_info?address=${currentViewAddress}`);
-
-            }).then((res) => {
-                var currentViewUserInfo = {
-                    avatar: res.data.picture,
-                    username: res.data.name,
-                    following: res.data.followings,
-                    currency: res.data.currency
-                }
-                dispatch(loadCurrentViewUserInfo(currentViewUserInfo));
-            }).catch((err) => {
-                console.log(err);
-            })
-    },
     loadNewsFeed:(currentViewAddress) => () => {
         axios.get(`http://localhost:3002/get/current_user_info?address=${currentViewAddress}`)
             .then( (res)  => {
@@ -84,9 +49,9 @@ const mapDispatchToProps = (dispatch, ownProps) => bindActionCreators({
     },
 }, dispatch)
 
-const AppCont = connect(
+const NewsFeedContainer = connect(
     mapStateToProps,
     mapDispatchToProps
-)(SemiHeader);
+)(App);
 
-export default AppCont;
+export default NewsFeedContainer;

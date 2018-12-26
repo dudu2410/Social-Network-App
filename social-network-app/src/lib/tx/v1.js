@@ -27,6 +27,7 @@ const PlainTextContent = vstruct([
 ]);
 
 
+
 const PostParams = vstruct([
   // Maximum length 65536 in bytes
   { name: 'content', type: vstruct.VarBuffer(vstruct.UInt16BE) },
@@ -41,6 +42,10 @@ const UpdateAccountParams = vstruct([
   { name: 'value', type: vstruct.VarBuffer(vstruct.UInt16BE) },
 ]);
 
+const Followings = vstruct([
+  { name: 'addresses', type: vstruct.VarArray(vstruct.UInt16BE, vstruct.Buffer(35)) },
+]);
+
 const InteractParams = vstruct([
   // Post or comment (or something else?)
   { name: 'object', type: vstruct.Buffer(32) },
@@ -50,15 +55,31 @@ const InteractParams = vstruct([
   // React if '', like, love, haha, anrgy, sad, wow
 ]);
 
-export function encodePlainTextContent(content) {
+function decodeBase32(data){
+  return base32.decode(data);
+}
+
+function encodeBase32(data){
+  return base32.encode(data);
+}
+
+function encodePlainTextContent(content) {
   return PlainTextContent.encode(content);
 }
 
-export function decodePlainTextContent(data) {
+function decodePlainTextContent(data) {
   return PlainTextContent.decode(data)
 }
 
-export function encode(tx) {
+function encodeFollowsValue(value){
+  return Followings.encode(value);
+}
+
+function decodeFollowsValue(data){
+  return Followings.decode(data);
+}
+
+function encode(tx) {
   let params, operation;
   if (tx.version !== 1) {
     throw Error('Wrong version');
@@ -113,7 +134,7 @@ export function encode(tx) {
   });
 }
 
-export function decode(data) {
+function decode(data) {
   const tx = Transaction.decode(data);
   if (tx.version !== 1) {
     throw Error('Wrong version');
@@ -163,3 +184,14 @@ export function decode(data) {
     signature: tx.signature,
   };
 }
+
+export {
+  encode,
+  decode,
+  encodePlainTextContent,
+  decodePlainTextContent,
+  decodeFollowsValue,
+  encodeFollowsValue,
+  decodeBase32,
+  encodeBase32
+};

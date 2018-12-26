@@ -2,8 +2,8 @@ import React from 'react'
 import '../Css/Semi-Header.css'
 import {Link} from 'react-router-dom'
 
-export const SemiHeader = ({followers,onFollowClick}) => {
-    console.log("ham la:" + onFollowClick);
+export const SemiHeader = ({onFollowClick,currentViewAddress, loadPosts}) => {
+    console.log("ham loadPosts:" + loadPosts);
     const owner = {
         id: 4,
         avatar: "http://placekitten.com/200/200",
@@ -13,13 +13,13 @@ console.log("oject: "+owner);
     return (
         
         <ul>
-            <Link to="/"><li className="space"><a href='' style = {{color : "red"}}>Posts</a></li></Link>
-            <Link to="/followers"><li><a href='' style = {{color : "red"}}>Followers</a></li></Link> 
-            <Link to="/"><li><a href="/followers" style = {{color : "red"}} onClick={(e) => {onFollowClick(e, owner);}}>Follow</a>
-            </li></Link>
-            <Link to="/"><li><a href='' style = {{color : "black"}}>Likes</a></li></Link>
-            <Link to="/"><li><a href='' style = {{color : "black"}}>Lists</a></li></Link>
-            <Link to="/"><li><a href='' style = {{color : "black"}}>Moments</a></li></Link>
+            <li className="space" onClick = {()=>{loadPosts(currentViewAddress)}}><Link to="/newsfeed" style = {{color : "red"}}> Posts</Link></li>
+            <li ><Link to="/followers" style = {{color : "red"}}>Followers</Link></li> 
+            <li  onClick={(e) => {onFollowClick(e, owner);}}><Link to="/" style = {{color : "red"}}>Follow
+            </Link></li>
+            <li ><Link to="/" style = {{color : "black"}}>Likes</Link></li>
+            <li ><Link to="/" style = {{color : "black"}}>Lists</Link></li>
+            <li ><Link to="/" style = {{color : "black"}}>Moments</Link></li>
         </ul>
         
     )

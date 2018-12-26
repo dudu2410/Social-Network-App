@@ -89,6 +89,6 @@ function GetPKFromFK(secret) {
   const key = Keypair.fromSecret(secret);
   return key.publicKey();
 } 
-export {encode, decode, verify, sign, hash, encodePostContent, decodePostContent, GetPKFromFK}
+//export {encode, decode, verify, sign, hash, encodePostContent, decodePostContent, GetPKFromFK}
 
-// module.exports = { encode, decode, verify, sign, hash, encodePostContent, decodePostContent };
+ export { encode, decode, verify, sign, hash, encodePostContent, decodePostContent,GetPKFromFK };
