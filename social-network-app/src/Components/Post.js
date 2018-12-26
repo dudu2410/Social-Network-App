@@ -3,6 +3,8 @@ import '../Css/Post.css'
 import { TextContent } from './TextContent'
 import { UpdateAccountContent } from './UpdateAccountContent'
 import { PaymentContent } from './PaymentContent'
+import { CreateAccountContent } from './CreateAccountContent';
+import { FollowingContent } from './FollowingContent';
 
 export const Post = ({ post, userInfo }) => {
   var postContent;
@@ -14,13 +16,22 @@ export const Post = ({ post, userInfo }) => {
       }
     case 'update_account':
       {
-        postContent = <UpdateAccountContent content={post.content} contentType={post.content_type} />
+        if (post.content_type !== 'followings') {
+          postContent = <UpdateAccountContent content={post.content} contentType={post.content_type} />
+        }
+        else {
+          postContent = <FollowingContent content={post.content} contentType={post.content_type} />
+        }
         break;
       }
     case 'payment':
       {
-        console.log(post);
         postContent = <PaymentContent content={post.content} contentType={post.content_type} from={post.from} current_view_address={post.current_view_address} />
+        break;
+      }
+    case 'create_account':
+      {
+        postContent = <CreateAccountContent content={post.content} contentType={post.content_type} />
         break;
       }
     default:
@@ -34,7 +45,7 @@ export const Post = ({ post, userInfo }) => {
   if (userInfo !== undefined) {
     var imgPrefix = userInfo.avatar.includes('data') ? '' : 'data:image/jpeg;base64,';
     usernameTag = userInfo.username;
-    imgTag = <img className="tweetEntry-avatar" src={imgPrefix + userInfo.avatar} alt="" /> 
+    imgTag = <img className="tweetEntry-avatar" src={imgPrefix + userInfo.avatar} alt="" />
   }
 
   return (
@@ -42,13 +53,15 @@ export const Post = ({ post, userInfo }) => {
       <div className="tweetEntry-tweetHolder">
         <div className="tweetEntry">
           <div className="tweetEntry-content">
-            <a className="tweetEntry-account-group" href="[accountURL]">
-              {imgTag}
-              <strong className="tweetEntry-fullname">
-                {usernameTag} <img src="./../Social-Network-App/social-network-app/src/Icons/check.png" alt="" className="icon_check" />
-              </strong>
-            </a>
-            <div className="tweetEntry-text-container">{postContent}</div>
+            <div className="row post-entry-row">
+              <div>{imgTag}</div>
+              <div className='right-column-container'>
+                <div className="tweetEntry-fullname">
+                  {usernameTag}
+                </div>
+                <div className="tweetEntry-text-container">{postContent}</div>
+              </div>
+            </div>
           </div>
           <div className="tweetEntry-action-list" style={{ lineHeight: '24px', color: '#b1bbc3' }}>
             <i className="fa fa-reply" style={{ width: '80px', padding: '0 5px 0 5px' }}> Reply: {post.comment}</i>

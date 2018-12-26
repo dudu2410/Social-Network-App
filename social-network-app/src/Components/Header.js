@@ -21,7 +21,7 @@ export const Header = ({ user, isLogin, onPostClick, onLogOut }) => {
     }
 
     return (
-        <nav className="navbar justify-content-between navbar-dark bg-primary">
+        <nav className="justify-content-between navbar-dark bg-primary fixed navbar">
             <div>App name</div>
             <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#exampleModal">New post</button>
             {button}

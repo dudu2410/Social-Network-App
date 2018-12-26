@@ -7,17 +7,15 @@ export const PostList = ({ posts, currentViewUserInfo }) => {
     if (posts === undefined) {
         return (
             <div className='container loader-container'>
-                <div className="loader big-loader"/>
+                <div className="loader big-loader" />
             </div>
         );
     }
     return (
-        <div className="background">
-            <ul>
-                {posts.map((post, index) => (
-                    <Post key={post.id} post = {post} userInfo={currentViewUserInfo}/>
-                ))}
-            </ul>
+        <div className="post-container">
+            {posts.map((post, index) => (
+                <Post key={post.id} post={post} userInfo={currentViewUserInfo} />
+            ))}
         </div>
     );
 }

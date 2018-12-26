@@ -13,3 +13,6 @@
 .util {
     padding: 2px;
 }
+.fixed{
+    margin-bottom: 0px !important;
+}

@@ -11,7 +11,6 @@ export const SemiHeader = ({onFollowClick,currentViewAddress, loadPosts}) => {
     }
 console.log("oject: "+owner);
     return (
-        
         <ul>
             <li className="space" onClick = {()=>{loadPosts(currentViewAddress)}}><Link to="/newsfeed" style = {{color : "red"}}> Posts</Link></li>
             <li ><Link to="/followers" style = {{color : "red"}}>Followers</Link></li> 

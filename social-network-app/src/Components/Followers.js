@@ -9,7 +9,7 @@ const Followers = ({ followers }) => {
   console.log("danh sanh tv " + followers);
   if (followers === undefined) {
     return (
-      <div className='container loader-container'>
+      <div className='container loader-container following-page-loader'>
         <div className="loader big-loader" />
       </div>
     );
