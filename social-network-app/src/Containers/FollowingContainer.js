@@ -16,6 +16,7 @@ const mapDispatchToProps = (dispatch, ownProps) => bindActionCreators({
             .then(async res  => {
          var followers = [];
          console.log("log async 1");
+         console.log(current_user);
          await  res.data.followings.forEach(following => {
             console.log("log await 1");
                             axios.get(`http://localhost:3002/get/current_user_info?address=${following}`)

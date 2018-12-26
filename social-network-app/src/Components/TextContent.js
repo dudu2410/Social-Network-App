@@ -4,8 +4,6 @@ import '../Css/Post.css'
 
 export const TextContent = ({ content, contentType }) => {
     var exportContent;
-    console.log("Asafasfasf");
-    console.log(contentType);
     switch (contentType) {
         case 'text':
             {

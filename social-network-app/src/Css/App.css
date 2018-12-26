@@ -4,12 +4,16 @@
 .container{
     width: 700px !important;
 }
-.loader-container {
+.following-page-loader {
     min-height: 700px;
     background: white;
-    width: 100%;
     padding-top: 30px;
+}                              
+
+.loader-container {
+    width: 100%;
 }
+
 .loader {
     border: 5px solid #f3f3f3;
     border-radius: 50%;
@@ -18,6 +22,7 @@
     height: 40px;
     -webkit-animation: spin 2s linear infinite; /* Safari */
     animation: spin 2s linear infinite;
+    margin: auto;
 }
 .small-loader {
     border: 3px solid #f3f3f3!important;
@@ -37,7 +42,15 @@
 .follower-container {
     min-height: 700px;
 }
-  
+
+.post-container {
+    width: 700px;
+    padding: 10px 20px 10px 20px;
+    background: white;
+    margin: auto;
+}
+
+
   /* Safari */
   @-webkit-keyframes spin {
     0% { -webkit-transform: rotate(0deg); }

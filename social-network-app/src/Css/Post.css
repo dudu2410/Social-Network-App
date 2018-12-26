@@ -33,9 +33,11 @@ body {
   /************************/
   
   .tweetEntry {
-    border-bottom: 1px solid #e1e8ed;
+    border: 1px solid #18dcff;
     min-height: 51px;
     padding: 9px 12px;
+    box-shadow: 0 0 5px #4b4b4b;
+    background: #222f3e;
   }
   .tweetEntry-content {
     display: block;
@@ -53,14 +55,15 @@ body {
     float: left;
     height: 48px;
     width: 48px;
-    margin-left: -58px;
-    border-radius: 5px;
+    margin-left: -60px;
+    border-radius: 50%;
+    border: 2px solid #18dcff;
   }
   .tweetEntry-fullname {
-    font-weight: bold;
-    font-size: 14px;
-    color: #292f33;
+    font-size: 17px;
+    color: #18dcff;
     padding: 0px;
+    margin-top: 8px;
   }
   .tweetEntry-username {
     font-weight: bold;
@@ -78,6 +81,15 @@ body {
     color: #292f33;
     line-height: 18px;
     min-height: 100px;
+    width: 100%;
+    padding: 30px 10px 30px;
+    margin-top: 15px;
+    background: #48dbfb;
+    border: 1px solid #18dcff;
+    -moz-box-shadow:    inset 0 0 10px #1e272e;
+    -webkit-box-shadow: inset 0 0 10px #1e272e;
+    box-shadow:         inset 0 0 10px #1e272e;
+    text-align: center;
   }
   
   .optionalMedia {
@@ -119,4 +131,36 @@ body {
 
   .user-link:hover {
     opacity: 0.8;
+  }
+
+  .address-content {
+    text-align: center;
+    font-size: 12px;
+    font-weight: bold;
+    color: #00cec9;
+  }
+  .address-content-title {
+    text-align: center;
+  }
+
+  .following-content-container {
+    text-align: center;
+  }
+
+  .following-content-title {
+    color: #eb2f06;
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  .post-entry-row {
+    margin: 0!important;
+  }
+
+  .right-column-container {
+    width: 100%;
+  }
+
+  .post-img-container {
+    padding: 10px;
   }
