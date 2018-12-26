@@ -1,9 +1,33 @@
 import React from 'react'
 import '../Css/UserInfor.css'
 import { connect } from 'react-redux';
-import { Panel, Image, Row, Col } from 'react-bootstrap';
+import { Panel, Image, Row, Col, Button, Glyphicon, Modal, FormControl } from 'react-bootstrap';
 
 class UserInfor extends React.Component {
+    constructor(props, context) {
+        super(props, context);
+    
+        this.onUpdate = this.onUpdate.bind(this);
+        this.handleHide = this.handleHide.bind(this);
+        this.onChange = this.onChange.bind(this);
+    
+        this.state = {
+          show: false,
+          userUpdate: ''
+        };
+      }
+
+    onUpdate() {
+        console.log(this.state.userUpdate);
+    }
+
+    onChange(e) {
+        this.setState({ [e.target.name]: e.target.value });
+    };
+    
+    handleHide() {
+        this.setState({ show: false });
+    }
     render() {
         var userName =""
         var userAmout = 0
@@ -21,9 +45,23 @@ class UserInfor extends React.Component {
         }
 
         return (
+          <div>
             <Panel bsStyle="primary">
                 <Panel.Heading>
-                    <Panel.Title componentClass="h3">Thông tin user:</Panel.Title>
+                    <Row>
+                        <Col xs={12} md={8}>
+                            <Panel.Title componentClass="h3">Thông tin user:</Panel.Title>
+                        </Col>
+                        <Col xs={6} md={4}>
+                        {(this.props.currentLogginAddress === this.props.currentViewAddress) ? (
+                            <Button  onClick={() => this.setState({ show: true })}>
+                                <Glyphicon glyph="edit"/>
+                            </Button>                        
+                        ) : (
+                            <div></div>
+                        )}
+                        </Col>
+                    </Row>
                 </Panel.Heading>
                 <Panel.Body>
                     <Row>
@@ -32,15 +70,47 @@ class UserInfor extends React.Component {
                             {/* <Image src="http://www.croop.cl/UI/twitter/images/russel.jpg" circle className="userAvatar"/> */}
                         </Col>
                         <Col xs={12} md={8}>
-                            {userName}
+                            <strong>{userName}</strong>
                             <br></br>
-                            Số dư: {userAmout}
+                            <strong>Số dư: </strong>{userAmout}
                             <br></br>
-                            Năng lượng: 
+                            <strong>Năng lượng:</strong>
                         </Col>
                     </Row>
                 </Panel.Body>
             </Panel>
+            <Modal
+            show={this.state.show}
+            onHide={this.handleHide}
+            container={this}
+            aria-labelledby="contained-modal-title"
+          >
+            <Modal.Header>
+              <Modal.Title id="contained-modal-title">
+                Cập nhật thông tin tài khoản
+              </Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                <Row>
+                    <Col Col xs={6} md={4} className='label_update'>
+                        Tên cập nhật mới:
+                    </Col>
+                    <Col Col xs={12} md={8}>
+                        <FormControl
+                            name="userUpdate"
+                            type="text"
+                            onChange={this.onChange}
+                            placeholder="Enter text"
+                        />
+                    </Col>
+                </Row>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button onClick={this.handleHide}>Close</Button>
+              <Button onClick={this.onUpdate}>Update</Button>
+            </Modal.Footer>
+          </Modal>
+          </div>
         )
     }
 }
@@ -48,6 +118,8 @@ class UserInfor extends React.Component {
 const mapStateToProps = (state) => {
     return {
         userInfor: state.appReducer.currentViewUserInfo,
+        currentLogginAddress: state.appReducer.currentLogginAddress,
+        currentViewAddress: state.appReducer.currentViewAddress
     }
 }
 
