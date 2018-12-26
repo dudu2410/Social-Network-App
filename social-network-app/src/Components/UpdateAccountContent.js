@@ -20,7 +20,7 @@ export const UpdateAccountContent = ({ content, contentType }) => {
                 var imgPrefix = content.includes('data') ? '' : 'data:image/jpeg;base64,';
                 exportContent = (<div>
                     <div>{updatePrefix}</div>
-                    <div><img src={imgPrefix + content} alt='avatar' /></div>
+                    <div className='post-img-container'><img src={imgPrefix + content} width='72px' heigth='72' alt='' /></div>
                 </div>);
                 break;
             }

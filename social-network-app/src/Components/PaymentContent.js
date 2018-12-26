@@ -19,7 +19,7 @@ export class PaymentContent extends React.Component {
     onClickUser(e, address) {
         e.preventDefault();
         store.dispatch(changeCurrentViewUser(address));
-        this.context.router.history.push("/home");
+        this.context.router.history.push("/");
     }
 
     static contextTypes = {

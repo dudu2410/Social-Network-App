@@ -2,7 +2,8 @@ var { decode, encode,
     sign, encodePostContent,
     decodePostContent, hash,
     encodeBase32,
-    decodeFollowings } = require("../../lib/tx");
+    decodeFollowings,
+    decodeReactContent } = require("../../lib/tx");
 const POST_OPERATION = 'post';
 const PAYMENT_OPERATION = 'payment';
 const CREATE_ACCOUNT_OPERATION = 'create_account';
@@ -14,7 +15,7 @@ var toSimpleTransactionInfo = (tx) => {
     var txjson = decode(Buffer.from(tx.tx, 'base64'));
     var simpleTransactionInfo = {
         tx_hash: tx.hash,
-        type: '',
+        type: 'unknown',
         content: '',
         content_type: '',
         from: '',
@@ -28,7 +29,7 @@ var toSimpleTransactionInfo = (tx) => {
             simpleTransactionInfo.content = postContent.text;
             simpleTransactionInfo.from = txjson.account;
             simpleTransactionInfo.sequence = txjson.sequence;
-            
+            console.log(`End mapping: ${POST_OPERATION} with result: ${JSON.stringify(simpleTransactionInfo)}`);
             break;
         }
         case PAYMENT_OPERATION: {
@@ -37,8 +38,7 @@ var toSimpleTransactionInfo = (tx) => {
             simpleTransactionInfo.content = txjson.params;
             simpleTransactionInfo.from = txjson.account;
             simpleTransactionInfo.sequence = txjson.sequence;
-            console.log('END PAYMENT_OPERATION');
-
+            console.log(`End mapping: ${PAYMENT_OPERATION} with result: ${JSON.stringify(simpleTransactionInfo)}`);
             break;
         }
         case CREATE_ACCOUNT_OPERATION: {
@@ -47,6 +47,7 @@ var toSimpleTransactionInfo = (tx) => {
             simpleTransactionInfo.content = txjson.params;
             simpleTransactionInfo.from = txjson.account;
             simpleTransactionInfo.sequence = txjson.sequence;
+            console.log(`End mapping: ${CREATE_ACCOUNT_OPERATION} with result: ${JSON.stringify(simpleTransactionInfo)}`);
             break;
         }
         case UPDATE_ACCOUNT_OPERATION: {
@@ -78,11 +79,17 @@ var toSimpleTransactionInfo = (tx) => {
                     txjson.params.value.toString('base64');
             simpleTransactionInfo.from = txjson.account;
             simpleTransactionInfo.sequence = txjson.sequence;
-
+            console.log(`End mapping: ${UPDATE_ACCOUNT_OPERATION} with result: ${JSON.stringify(simpleTransactionInfo)}`);
             break;
         }
         case INTERACT_OPERATION: {
-            console.log('INTERACT_OPERATION');
+            var interactContent = decodeReactContent(txjson.params.content)
+            simpleTransactionInfo.type = INTERACT_OPERATION;
+            simpleTransactionInfo.content_type = interactContent.type === 1 ? 'comment' : interactContent.type === 2 ? 'react' : 'unknown';
+            simpleTransactionInfo.content =  interactContent;
+            simpleTransactionInfo.from = txjson.account;
+            simpleTransactionInfo.sequence = txjson.sequence;
+            console.log(`End mapping: ${INTERACT_OPERATION} with result: ${JSON.stringify(simpleTransactionInfo)}`);
             break;
         }
         default: {
@@ -93,4 +100,4 @@ var toSimpleTransactionInfo = (tx) => {
 
 }
 
-module.exports = { toSimpleTransactionInfo, UPDATE_ACCOUNT_OPERATION,PAYMENT_OPERATION };
+module.exports = { toSimpleTransactionInfo, UPDATE_ACCOUNT_OPERATION, PAYMENT_OPERATION };

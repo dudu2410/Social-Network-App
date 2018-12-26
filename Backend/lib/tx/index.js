@@ -11,6 +11,10 @@ const PostContent = vstruct([
   { name: 'type', type: vstruct.UInt8 },
 ]);
 
+const reactType = vstruct([
+  { name: 'type', type: vstruct.UInt8 },
+]);
+
 function encode(tx) {
   switch (tx.version) {
     case 1:
@@ -79,21 +83,61 @@ function encodePostContent(content) {
 
 function decodePostContent(data) {
   var contentType = {};
-  try{
+  try {
     contentType = PostContent.decode(data);
   }
-  catch(err){
+  catch (err) {
     console.log(err);
     return { type: -1, text: '' };
   }
   switch (contentType.type) {
     case 1:
       return v1.decodePlainTextContent(data);
-      break;
     default:
       return { type: -1, text: '' };
   }
 }
+
+
+function decodeReactContent(data) {
+  var contentType = {};
+  try {
+    contentType = reactType.decode(data);
+    console.log(contentType);
+  }
+  catch (err) {
+    console.log(err);
+    return { type: -1 };
+  }
+  switch (contentType.type) {
+    case 1:
+      console.log(data);
+      var decoded;
+      try {
+        decoded = v1.decodePlainTextContent(data);
+      }
+      catch (err) {
+        console.log(err);
+        return { type: -1 }
+      }
+      return decoded;
+    case 2:
+      console.log(data);
+      var decoded;
+      try {
+        decoded = v1.decodeReactContent(data);
+      }
+      catch (err) {
+        console.log(err);
+        return { type: -1 }
+      }
+      return decoded;
+    default:
+      return { type: -1 };
+  }
+}
+
+
 
 function encodeFollowings(value) {
   return v1.encodeFollowsValue(value);
@@ -122,5 +166,6 @@ module.exports = {
   encodeFollowings,
   decodeFollowings,
   decodeBase32,
-  encodeBase32
+  encodeBase32,
+  decodeReactContent
 };

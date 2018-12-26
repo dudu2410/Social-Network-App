@@ -46,6 +46,11 @@ const Followings = vstruct([
   { name: 'addresses', type: vstruct.VarArray(vstruct.UInt16BE, vstruct.Buffer(35)) },
 ]);
 
+const ReactContent = vstruct([
+  { name: 'type', type: vstruct.UInt8 },
+  { name: 'reaction', type: vstruct.UInt8 },
+]);
+
 const InteractParams = vstruct([
   // Post or comment (or something else?)
   { name: 'object', type: vstruct.Buffer(32) },
@@ -54,6 +59,14 @@ const InteractParams = vstruct([
   { name: 'content', type: vstruct.VarBuffer(vstruct.UInt16BE) },
   // React if '', like, love, haha, anrgy, sad, wow
 ]);
+
+function decodeReactContent(data){
+  return ReactContent.decode(data);
+}
+
+function encodeReactContent(data){
+  return ReactContent.encode(data);
+}
 
 function decodeBase32(data){
   return base32.decode(data);
@@ -193,5 +206,7 @@ module.exports = {
   decodeFollowsValue,
   encodeFollowsValue,
   decodeBase32,
-  encodeBase32
+  encodeBase32,
+  decodeReactContent,
+  encodeReactContent
 };
