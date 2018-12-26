@@ -12,10 +12,25 @@ const server3 = 'https://dragonfly.forest.network';
 const server4 = 'https://gorilla.forest.network';
 const current_server = server1;
 const commitTransaction = (tx) => {
-    return `https://komodo.forest.network/broadcast_tx_commit?tx=0x${tx}`;
+    return `${current_server}/broadcast_tx_commit?tx=0x${tx}`;
 }
 const ANONYMOUS_AVT = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAMAAAC7IEhfAAAAA3NCSVQICAjb4U/gAAAAHlBMVEWgw/9DdOCjxv89cN80a96GqvR4nu9qkuqYu/xVgeQDZY0OAAAAsUlEQVQ4je2SSw7DIAxE8Rd8/wvXRLQCGgOVusxIWeVp8NiT0qOfhJf2WFFjNi0bFJUJAIhYl6Rz0LQkUT6ck7IADTpZbFm4B7nEL1MPkoSWp+DkyDF4OqOn7ixpkXqIvTAcNh5P+M5DVG+92E0jk2SzLGlftNrIA6j1dsP6/yKaXSolNkaUzFzD+Ede82BQFKDx1vc1Rxvu11j42vpwvV4zKDd+l+f0OmpgSPkB/wq+AGGABQw9k9L+AAAAAElFTkSuQmCC'
 const ANONYMOUST_NAME = 'Anonymous'
+
+var postTransactionService = (tx)=> {
+    return new Promise((resolve, rejects) => {
+        console.log(`posting a transaction to server`);
+        var uri = `${current_server}/tx_search?query="account=%27${address}%27"`;
+        axios.get(commitTransaction(tx))
+            .then((body) => {
+                resolve(body.data);
+            })
+            .catch((err) => {
+                rejects(err);
+            });
+    });
+}
+
 //get all transactions of an user by address
 var getAccountTransactionsService = (address) => {
     return new Promise((resolve, rejects) => {
@@ -206,5 +221,6 @@ module.exports = {
     getCurrentTransactionSequenceService,
     getUserInfoService,
     getCurrentBlockHeightService,
-    getAllTransactionOfBlockByHeightService
+    getAllTransactionOfBlockByHeightService,
+    postTransactionService
 };

@@ -106,4 +106,13 @@ public class UserTransactionRepositoryCustomImpl implements UserTransactionRepos
                 .fetch();
     }
 
+    @Override
+    public Long getHeartNumberOfTx(String txHash) {
+       return new JPAQuery<QUserTransaction>(entityManager)
+                .select(QUserTransaction.userTransaction.count())
+                .from(QUserTransaction.userTransaction)
+                .where(QUserTransaction.userTransaction.txHash.eq(txHash))
+                .fetchOne();
+    }
+
 }
