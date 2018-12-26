@@ -10,7 +10,7 @@ const server1 = 'https://komodo.forest.network';
 const server2 = 'https://zebra.forest.network';
 const server3 = 'https://dragonfly.forest.network';
 const server4 = 'https://gorilla.forest.network';
-const current_server = server2;
+const current_server = server1;
 const commitTransaction = (tx) => {
     return `https://komodo.forest.network/broadcast_tx_commit?tx=0x${tx}`;
 }
@@ -25,7 +25,7 @@ var getAccountTransactionsService = (address) => {
             .then((body) => {
                 var resultSet = [];
                 body.data.result.txs.forEach(tx => {
-                    resultSet.push(toSimpleTransactionInfo(tx));
+                    resultSet.push(toSimpleTransactionInfo(tx.tx));
                 });
                 resolve(resultSet);
             })
@@ -44,7 +44,7 @@ var getCurrentTransactionSequenceService = (address) => {
             .then((body) => {
                 var result = [];
                 body.data.result.txs.forEach(tx => {
-                    result.push(toSimpleTransactionInfo(tx));
+                    result.push(toSimpleTransactionInfo(tx.tx));
                 });
 
                 result = result.filter((info) => {
@@ -72,7 +72,7 @@ var getUserInfoService = (address) => {
             .then((body) => {
                 var result = [];
                 body.data.result.txs.forEach(tx => {
-                    result.push(toSimpleTransactionInfo(tx));
+                    result.push(toSimpleTransactionInfo(tx.tx));
                 });
                 var updateNameTxs = [];
                 updateNameTxs = result.filter((info) => {
@@ -100,6 +100,44 @@ var getUserInfoService = (address) => {
             });
     })
 }
+
+var getCurrentBlockHeightService = () => {
+    return new Promise((resolve, rejects) => {
+        console.log(`getting current block height`);
+        var uri = `${current_server}/block`;
+        axios.get(uri)
+            .then((body) => {
+                resolve(body.data.result.block_meta.header.height);
+            })
+            .catch((err) => {
+                console.log(err);
+                rejects(err);
+            });
+    })
+}
+
+var getAllTransactionOfBlockByHeightService = (height) => {
+    return new Promise((resolve, rejects) => {
+        console.log(`getting all transactions of block has height ${height}`);
+        var uri = `${current_server}/block?height=${height}`;
+        axios.get(uri)
+            .then((body) => {
+                var txs = body.data.result.block.data.txs;
+                var result = [];
+                if (txs !== null) {
+                    txs.forEach((tx)=>{
+                        result.push(toSimpleTransactionInfo(tx));
+                    })
+                }
+                resolve(result);
+            })
+            .catch((err) => {
+                console.log(err);
+                rejects(err);
+            });
+    })
+}
+
 
 
 //an ultil to find lastest transaction by sequence
@@ -163,4 +201,10 @@ var getUniqueArray = (array) => {
     return array.filter((v, i, a) => a.indexOf(v) === i);
 }
 
-module.exports = { getAccountTransactionsService, getCurrentTransactionSequenceService, getUserInfoService };
+module.exports = {
+    getAccountTransactionsService,
+    getCurrentTransactionSequenceService,
+    getUserInfoService,
+    getCurrentBlockHeightService,
+    getAllTransactionOfBlockByHeightService
+};

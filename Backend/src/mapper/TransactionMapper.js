@@ -12,9 +12,10 @@ const INTERACT_OPERATION = 'interact';
 
 
 var toSimpleTransactionInfo = (tx) => {
-    var txjson = decode(Buffer.from(tx.tx, 'base64'));
+    var txjson = decode(Buffer.from(tx, 'base64'));
+    console.log(txjson);
     var simpleTransactionInfo = {
-        tx_hash: tx.hash,
+        tx_hash: hash(decode(Buffer.from(tx, 'base64'))),
         type: 'unknown',
         content: '',
         content_type: '',
@@ -84,9 +85,13 @@ var toSimpleTransactionInfo = (tx) => {
         }
         case INTERACT_OPERATION: {
             var interactContent = decodeReactContent(txjson.params.content)
+            var content = {
+                object: txjson.params.object,
+                content: interactContent
+            }
             simpleTransactionInfo.type = INTERACT_OPERATION;
             simpleTransactionInfo.content_type = interactContent.type === 1 ? 'comment' : interactContent.type === 2 ? 'react' : 'unknown';
-            simpleTransactionInfo.content =  interactContent;
+            simpleTransactionInfo.content =  content;
             simpleTransactionInfo.from = txjson.account;
             simpleTransactionInfo.sequence = txjson.sequence;
             console.log(`End mapping: ${INTERACT_OPERATION} with result: ${JSON.stringify(simpleTransactionInfo)}`);

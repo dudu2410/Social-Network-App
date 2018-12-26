@@ -144,7 +144,15 @@ function encodeFollowings(value) {
 }
 
 function decodeFollowings(data) {
-  return v1.decodeFollowsValue(data);
+  var decoded;
+  try{
+    decoded = v1.decodeFollowsValue(data);
+  }
+  catch(err){
+    console.log(err);
+    return {addresses:[]};
+  }
+  return decoded;
 }
 
 function decodeBase32(data) {
